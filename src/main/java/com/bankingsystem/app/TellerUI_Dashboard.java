@@ -1,4 +1,4 @@
 package com.bankingsystem.app;
 
-public class MainApp {
+public class TellerUI_Dashboard {
 }
