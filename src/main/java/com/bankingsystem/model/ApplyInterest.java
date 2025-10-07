@@ -1,4 +1,4 @@
 package com.bankingsystem.model;
 
-public class ApplyInterest {
+public interface ApplyInterest {
 }
