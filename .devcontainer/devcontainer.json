@@ -1,12 +1,22 @@
 {
-  "name": "BankingSystem Java 21",
-  "build": {
-    "dockerfile": "Dockerfile"
+  "name": "Banking System Codespace (Maven + JavaFX + Oracle)",
+  "image": "mcr.microsoft.com/devcontainers/java:21",
+  "customizations": {
+    "vscode": {
+      "extensions": [
+        "vscjava.vscode-java-pack",
+        "vscjava.vscode-maven",
+        "mhutchie.git-graph"
+      ],
+      "settings": {
+        "java.configuration.updateBuildConfiguration": "automatic",
+        "java.project.sourcePaths": ["src/main/java"],
+        "java.project.outputPath": "target/classes",
+        "maven.executable.path": "/usr/bin/mvn",
+        "files.autoSave": "onFocusChange"
+      }
+    }
   },
-  "settings": {},
-  "extensions": [
-    "vscjava.vscode-java-pack",
-    "vscjava.vscode-java-debug"
-  ],
-  "postCreateCommand": "java -version && mvn -version"
+  "postCreateCommand": "mvn clean compile",
+  "remoteUser": "vscode"
 }
