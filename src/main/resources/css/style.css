@@ -1,0 +1,289 @@
+/* ==========================================================
+   SEDIBA FINANCIAL APPLICATION - COMBINED & RESPONSIVE CSS
+   Includes: Login, Dashboard, Account Lookup, Customer Management
+   Responsive Utilities Included
+   ========================================================== */
+
+/* ===== BASE & COMMON STYLES ===== */
+.root {
+    -fx-font-family: "Segoe UI", Arial, sans-serif;
+}
+
+/* Utility Responsive Font Sizes */
+.responsive-text-xs { -fx-font-size: 0.75em; }
+.responsive-text-sm { -fx-font-size: 0.875em; }
+.responsive-text-base { -fx-font-size: 1em; }
+.responsive-text-lg { -fx-font-size: 1.125em; }
+.responsive-text-xl { -fx-font-size: 1.25em; }
+.responsive-text-2xl { -fx-font-size: 1.5em; }
+.responsive-text-3xl { -fx-font-size: 1.875em; }
+
+/* Containers & Flex Layout */
+.responsive-container { -fx-max-width: 1200px; -fx-pref-width: 90%; }
+.responsive-card { -fx-min-width: 280px; -fx-pref-width: 100%; -fx-max-width: 500px; }
+
+.flex-row { -fx-alignment: CENTER_LEFT; -fx-spacing: 1em; }
+.flex-col { -fx-alignment: TOP_LEFT; -fx-spacing: 0.75em; }
+.flex-wrap { -fx-hgap: 1em; -fx-vgap: 1em; }
+
+.spacing-xs { -fx-spacing: 0.25em; }
+.spacing-sm { -fx-spacing: 0.5em; }
+.spacing-md { -fx-spacing: 1em; }
+.spacing-lg { -fx-spacing: 1.5em; }
+.spacing-xl { -fx-spacing: 2em; }
+
+/* ===== MEDIA QUERY SIMULATION ===== */
+.screen-small { }
+.screen-medium { }
+.screen-large { }
+.screen-xlarge { }
+
+/* ==========================================================
+   LOGIN SCREEN STYLES
+   ========================================================== */
+.login-background, .login-root {
+    -fx-background-color: linear-gradient(to bottom, #1a2a6c, #2a4a7c);
+    -fx-padding: 1em;
+}
+
+.login-card, .login-container {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 15, 0.2, 0, 5);
+    -fx-padding: 40 30 40 30;
+    -fx-border-radius: 12;
+    -fx-border-color: #e0e0e0;
+    -fx-border-width: 1;
+    -fx-min-width: 280px;
+    -fx-pref-width: 400px;
+    -fx-max-width: 500px;
+}
+
+.screen-small .login-container {
+    -fx-padding: 1.5em 1em;
+    -fx-pref-width: 95%;
+}
+
+.login-header {
+    -fx-background-color: linear-gradient(to right, #1a2a6c, #2a4a7c);
+    -fx-padding: 1.5em 1em;
+}
+
+.login-logo {
+    -fx-fill: white;
+    -fx-font-size: 1.75em;
+    -fx-font-weight: bold;
+}
+
+.login-greeting {
+    -fx-fill: #e0e0e0;
+    -fx-font-size: 16px;
+}
+
+.form-label {
+    -fx-font-size: 14px;
+    -fx-font-weight: bold;
+    -fx-text-fill: #2c3e50;
+}
+
+.form-field {
+    -fx-pref-height: 2.8em;
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 8;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 0 15;
+    -fx-font-size: 14px;
+}
+
+.form-field:focused {
+    -fx-border-color: #1a2a6c;
+    -fx-effect: dropshadow(gaussian, rgba(26, 42, 108, 0.2), 10, 0.3, 0, 0);
+    -fx-background-color: white;
+}
+
+.login-button {
+    -fx-pref-height: 2.8em;
+    -fx-background-color: linear-gradient(to right, #1a2a6c, #2a4a7c);
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-size: 0.875em;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+    -fx-effect: dropshadow(gaussian, rgba(0, 0, 0, 0.2), 8, 0.2, 0, 2);
+}
+
+.login-button:hover {
+    -fx-background-color: linear-gradient(to right, #2a4a7c, #3a6a9c);
+    -fx-translate-y: -2px;
+}
+
+.login-footer {
+    -fx-background-color: #2c3e50;
+    -fx-padding: 15 0;
+}
+
+.footer-text {
+    -fx-fill: #bdc3c7;
+    -fx-font-size: 12px;
+}
+
+.footer-link {
+    -fx-text-fill: #ecf0f1;
+    -fx-font-size: 12px;
+}
+
+.footer-link:hover { -fx-underline: true; }
+
+/* ==========================================================
+   DASHBOARD STYLES
+   ========================================================== */
+.dashboard-root {
+    -fx-background-color: #f5f7fa;
+    -fx-padding: 0.5em;
+}
+
+.dashboard-header {
+    -fx-background-color: linear-gradient(to right, #1a2a6c, #2a4a7c);
+    -fx-padding: 20 30;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),10,0.2,0,2);
+}
+
+.company-name {
+    -fx-fill: white;
+    -fx-font-size: 1.5em;
+    -fx-font-weight: bold;
+}
+
+.dashboard-section {
+    -fx-padding: 1.25em;
+    -fx-spacing: 1.25em;
+}
+
+.account-card, .action-card {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 25 20;
+    -fx-pref-width: 200;
+    -fx-pref-height: 180;
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),10,0.2,0,2);
+    -fx-cursor: hand;
+}
+
+.account-card:hover, .action-card:hover {
+    -fx-effect: dropshadow(gaussian, rgba(26,42,108,0.2),15,0.3,0,5);
+    -fx-border-color: #1a2a6c;
+    -fx-translate-y: -5px;
+}
+
+.account-type, .action-type {
+    -fx-fill: #1a2a6c;
+    -fx-font-size: 1.125em;
+    -fx-font-weight: bold;
+}
+
+/* ==========================================================
+   ACCOUNT LOOKUP STYLES
+   ========================================================== */
+.lookup-root { -fx-background-color: #f5f7fa; -fx-padding: 0.5em; }
+
+.lookup-header {
+    -fx-background-color: linear-gradient(to right, #1a2a6c, #2a4a7c);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),10,0.2,0,2);
+}
+
+.lookup-section, .details-section {
+    -fx-background-color: white;
+    -fx-background-radius: 12;
+    -fx-padding: 1.5625em 1.875em;
+    -fx-border-color: #e0e0e0;
+    -fx-border-radius: 12;
+    -fx-border-width: 1;
+}
+
+.search-field {
+    -fx-pref-height: 2.8em;
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 8;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 8;
+    -fx-border-width: 1;
+    -fx-padding: 0 15;
+    -fx-font-size: 0.875em;
+}
+
+.search-field:focused {
+    -fx-border-color: #1a2a6c;
+    -fx-background-color: white;
+}
+
+/* ==========================================================
+   CUSTOMER MANAGEMENT STYLES
+   ========================================================== */
+.customer-header {
+    -fx-background-color: linear-gradient(to right, #1a2a6c, #2a4a7c);
+    -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.1),10,0.2,0,2);
+}
+
+.customer-detail-field {
+    -fx-pref-height: 2.5em;
+    -fx-background-color: #f8f9fa;
+    -fx-background-radius: 6;
+    -fx-border-color: #d1d1d1;
+    -fx-border-radius: 6;
+    -fx-border-width: 1;
+    -fx-padding: 0 12;
+    -fx-font-size: 0.875em;
+}
+
+.customer-detail-field:focused {
+    -fx-border-color: #1a2a6c;
+    -fx-background-color: white;
+}
+
+.save-button, .update-button, .action-button {
+    -fx-background-color: linear-gradient(to right, #1a2a6c, #2a4a7c);
+    -fx-background-radius: 8;
+    -fx-text-fill: white;
+    -fx-font-weight: bold;
+    -fx-cursor: hand;
+}
+
+/* ==========================================================
+   RESPONSIVE GRID & BUTTONS
+   ========================================================== */
+.responsive-grid { -fx-hgap: 1em; -fx-vgap: 1em; }
+.grid-1 { -fx-pref-columns: 1; }
+.grid-2 { -fx-pref-columns: 2; }
+.grid-3 { -fx-pref-columns: 3; }
+.grid-4 { -fx-pref-columns: 4; }
+
+.btn-responsive {
+    -fx-pref-height: 2.8em;
+    -fx-min-width: 80px;
+    -fx-font-size: 0.875em;
+    -fx-padding: 0 1em;
+}
+
+.btn-block { -fx-max-width: infinity; }
+
+/* ==========================================================
+   TABLE & UTILITY CLASSES
+   ========================================================== */
+.responsive-table { -fx-pref-width: 100%; }
+
+.clickable { -fx-cursor: hand; }
+.disabled { -fx-opacity: 0.6; -fx-cursor: default; }
+
+.success { -fx-background-color: #d4edda; -fx-border-color: #c3e6cb; -fx-text-fill: #155724; }
+.error { -fx-background-color: #f8d7da; -fx-border-color: #f5c6cb; -fx-text-fill: #721c24; }
+.warning { -fx-background-color: #fff3cd; -fx-border-color: #ffeaa7; -fx-text-fill: #856404; }
+
+.w-full { -fx-pref-width: 100%; }
+.h-full { -fx-pref-height: 100%; }
+.text-center { -fx-text-alignment: center; }
+.align-center { -fx-alignment: CENTER; }
+.hidden { -fx-visible: false; -fx-managed: false; }
+.visible { -fx-visible: true; -fx-managed: true; }
+

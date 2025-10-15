@@ -1,0 +1,134 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.sediba.AccountLookupController"
+            stylesheets="@account-lookup.css"
+            prefWidth="900" prefHeight="700">
+
+    <top>
+        <!-- Header Section -->
+        <VBox styleClass="header" spacing="15">
+            <!-- Company Logo and Name -->
+            <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 20 30 0 30;">
+                <ImageView fx:id="companyLogo" fitWidth="45" fitHeight="45" preserveRatio="true">
+                    <Image url="@sediba-logo.png" />
+                </ImageView>
+                <Text text="Sediba Financial" styleClass="company-name" />
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <Button text="Back to Dashboard" styleClass="back-button"
+                        onAction="#handleBackToDashboard" />
+            </HBox>
+
+            <!-- User Greeting -->
+            <VBox alignment="CENTER_LEFT" style="-fx-padding: 0 30 20 30;">
+                <Text text="Good Day" styleClass="greeting" />
+                <Text fx:id="usernameText" text="[Username]" styleClass="username" />
+            </VBox>
+        </VBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="30" style="-fx-padding: 30;">
+            <!-- Lookup Account/Customer Section -->
+            <VBox alignment="CENTER_LEFT" spacing="20" styleClass="lookup-section">
+                <Text text="Lookup Account/Customer" styleClass="section-title" />
+
+                <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 0 0 10 0;">
+                    <!-- Search Field -->
+                    <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 400;">
+                        <Label text="Search..." styleClass="field-label" />
+                        <TextField fx:id="searchField" styleClass="search-field"
+                                   promptText="Enter account number, customer name, or ID..." />
+                    </VBox>
+
+                    <!-- Filter Options -->
+                    <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 200;">
+                        <Label text="Filter" styleClass="field-label" />
+                        <ComboBox fx:id="filterComboBox" styleClass="filter-combo"
+                                  promptText="Select filter..." />
+                    </VBox>
+
+                    <!-- Search Button -->
+                    <Button text="Search" styleClass="search-button"
+                            onAction="#handleSearch"
+                            style="-fx-translate-y: 15;"/>
+                </HBox>
+
+                <!-- Search Results Table (initially hidden) -->
+                <TableView fx:id="resultsTable" styleClass="results-table"
+                           prefHeight="200" visible="false" managed="false">
+                    <columns>
+                        <TableColumn text="Account Number" prefWidth="150" />
+                        <TableColumn text="Account Holder" prefWidth="200" />
+                        <TableColumn text="Account Type" prefWidth="120" />
+                        <TableColumn text="Date Created" prefWidth="120" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Separator -->
+            <Separator styleClass="section-separator" />
+
+            <!-- Account Details Section -->
+            <VBox alignment="CENTER_LEFT" spacing="20" styleClass="details-section">
+                <Text text="Account Details" styleClass="section-title" />
+
+                <HBox alignment="TOP_LEFT" spacing="50">
+                    <!-- Left Column -->
+                    <VBox alignment="TOP_LEFT" spacing="20" style="-fx-pref-width: 400;">
+                        <VBox alignment="CENTER_LEFT" spacing="8">
+                            <Label text="Account Number" styleClass="detail-label" />
+                            <Text fx:id="accountNumberText" text="-" styleClass="detail-value" />
+                        </VBox>
+
+                        <VBox alignment="CENTER_LEFT" spacing="8">
+                            <Label text="Account Holder" styleClass="detail-label" />
+                            <Text fx:id="accountHolderText" text="-" styleClass="detail-value" />
+                        </VBox>
+                    </VBox>
+
+                    <!-- Right Column -->
+                    <VBox alignment="TOP_LEFT" spacing="20" style="-fx-pref-width: 400;">
+                        <VBox alignment="CENTER_LEFT" spacing="8">
+                            <Label text="Account Type" styleClass="detail-label" />
+                            <Text fx:id="accountTypeText" text="-" styleClass="detail-value" />
+                        </VBox>
+
+                        <VBox alignment="CENTER_LEFT" spacing="8">
+                            <Label text="Date Created" styleClass="detail-label" />
+                            <Text fx:id="dateCreatedText" text="-" styleClass="detail-value" />
+                        </VBox>
+                    </VBox>
+                </HBox>
+
+                <!-- Additional Action Buttons -->
+                <HBox alignment="CENTER_LEFT" spacing="15" style="-fx-padding: 20 0 0 0;">
+                    <Button text="View Full Profile" styleClass="action-button"
+                            onAction="#handleViewProfile" />
+                    <Button text="Transaction History" styleClass="action-button"
+                            onAction="#handleTransactionHistory" />
+                    <Button text="Edit Account" styleClass="action-button-secondary"
+                            onAction="#handleEditAccount" />
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="10" styleClass="footer">
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
+            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
+                       onAction="#handleTermsAndConditions" />
+        </VBox>
+    </bottom>
+</BorderPane>

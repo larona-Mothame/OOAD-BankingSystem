@@ -1,0 +1,112 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.sectionfinancial.DashboardController"
+            stylesheets="@dashboard.css"
+            prefWidth="800" prefHeight="600">
+
+    <top>
+        <!-- Header with logo and user info -->
+        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+            <HBox alignment="CENTER_LEFT" spacing="15">
+                <ImageView fx:id="companyLogo" fitWidth="40" fitHeight="40" preserveRatio="true">
+                    <Image url="@financial-icon.png" />
+                </ImageView>
+                <Text text="Section Financial" styleClass="company-name" />
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <VBox alignment="CENTER_RIGHT" spacing="5">
+                <Text text="Good Day" styleClass="greeting" />
+                <Text fx:id="usernameText" text="[Username]" styleClass="username" />
+            </VBox>
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="40" style="-fx-padding: 40;">
+            <!-- Open New Account Section -->
+            <VBox alignment="CENTER_LEFT" spacing="20" styleClass="dashboard-section">
+                <Text text="Open new Account" styleClass="section-title" />
+
+                <HBox alignment="CENTER_LEFT" spacing="30">
+                    <!-- Chequing Account Card -->
+                    <VBox styleClass="account-card" alignment="CENTER" spacing="15"
+                          onMouseClicked="#openChequingAccount">
+                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
+                            <Image url="@chequing-icon.png" />
+                        </ImageView>
+                        <Text text="Chequing" styleClass="account-type" />
+                        <Text text="Manage daily transactions" styleClass="account-description" />
+                    </VBox>
+
+                    <!-- Savings Account Card -->
+                    <VBox styleClass="account-card" alignment="CENTER" spacing="15"
+                          onMouseClicked="#openSavingsAccount">
+                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
+                            <Image url="@savings-icon.png" />
+                        </ImageView>
+                        <Text text="Savings" styleClass="account-type" />
+                        <Text text="Grow your money safely" styleClass="account-description" />
+                    </VBox>
+
+                    <!-- Investment Account Card -->
+                    <VBox styleClass="account-card" alignment="CENTER" spacing="15"
+                          onMouseClicked="#openInvestmentAccount">
+                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
+                            <Image url="@investment-icon.png" />
+                        </ImageView>
+                        <Text text="Investment" styleClass="account-type" />
+                        <Text text="Build your wealth" styleClass="account-description" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- Separator -->
+            <Separator styleClass="section-separator" />
+
+            <!-- Manage Customers Section -->
+            <VBox alignment="CENTER_LEFT" spacing="20" styleClass="dashboard-section">
+                <Text text="Manage Customers" styleClass="section-title" />
+
+                <HBox alignment="CENTER_LEFT" spacing="30">
+                    <!-- Proceed Card -->
+                    <VBox styleClass="action-card" alignment="CENTER" spacing="15"
+                          onMouseClicked="#proceedToCustomerManagement">
+                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
+                            <Image url="@proceed-icon.png" />
+                        </ImageView>
+                        <Text text="Proceed" styleClass="action-type" />
+                        <Text text="Continue customer operations" styleClass="action-description" />
+                    </VBox>
+
+                    <!-- Manage Card -->
+                    <VBox styleClass="action-card" alignment="CENTER" spacing="15"
+                          onMouseClicked="#manageCustomers">
+                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
+                            <Image url="@manage-icon.png" />
+                        </ImageView>
+                        <Text text="Manage" styleClass="action-type" />
+                        <Text text="Customer account management" styleClass="action-description" />
+                    </VBox>
+                </HBox>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="10" styleClass="footer">
+            <Text text="© 2025 Section Financial. All rights reserved." styleClass="footer-text" />
+            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link" />
+        </VBox>
+    </bottom>
+</BorderPane>
