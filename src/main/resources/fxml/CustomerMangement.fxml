@@ -8,20 +8,19 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.seqiba.CustomerManagementController"
-            stylesheets="@customer-management.css"
+            fx:controller="com.bankingsystem.controllers.CustomerProfileController"
+            stylesheets="@"
             prefWidth="850" prefHeight="700">
 
     <top>
         <!-- Header Section -->
         <VBox styleClass="header" spacing="10">
-            <!-- Top Bar with Logo and User Info -->
             <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
                 <HBox alignment="CENTER_LEFT" spacing="15">
                     <ImageView fx:id="companyLogo" fitWidth="35" fitHeight="35" preserveRatio="true">
-                        <Image url="@seqiba-logo.png" />
+                        <Image url="@" />
                     </ImageView>
-                    <Text text="Seqiba Financial" styleClass="company-name" />
+                    <Text text="Sediba Financial" styleClass="company-name" />
                 </HBox>
 
                 <Region HBox.hgrow="ALWAYS" />
@@ -48,69 +47,64 @@
                     </VBox>
 
                     <VBox alignment="CENTER_LEFT" spacing="8">
-                        <Label text=" " styleClass="section-label" /> <!-- Spacer -->
+                        <Label text=" " styleClass="section-label" />
                         <HBox alignment="CENTER_LEFT" spacing="10">
                             <Text fx:id="currentUserText" text="[Username]" styleClass="current-user" />
-                            <Hyperlink text="view all accounts" styleClass="view-all-link"
-                                       onAction="#handleViewAllAccounts" />
+                            <Hyperlink text="View All Customers" styleClass="view-all-link"
+                                       onAction="#handleViewAllCustomers" />
                         </HBox>
                     </VBox>
+
+                    <Button text="Search" styleClass="search-button" onAction="#handleSearch" />
                 </HBox>
             </VBox>
 
-            <!-- Separator -->
             <Separator styleClass="main-separator" />
 
             <!-- Customer Details Section -->
             <VBox alignment="TOP_LEFT" spacing="25" styleClass="details-section">
                 <Text text="Customer Information" styleClass="section-title" />
 
-                <!-- Personal Information Row -->
+                <!-- Personal Information -->
                 <HBox alignment="TOP_LEFT" spacing="40">
-                    <!-- First Name -->
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="First name" styleClass="field-label" />
+                        <Label text="First Name" styleClass="field-label" />
                         <TextField fx:id="firstNameField" styleClass="detail-field"
                                    promptText="Enter first name" />
                     </VBox>
 
-                    <!-- Last Name -->
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Last name" styleClass="field-label" />
+                        <Label text="Last Name" styleClass="field-label" />
                         <TextField fx:id="lastNameField" styleClass="detail-field"
                                    promptText="Enter last name" />
                     </VBox>
                 </HBox>
 
-                <!-- Second Row -->
+                <!-- Row 2 -->
                 <HBox alignment="TOP_LEFT" spacing="40">
-                    <!-- Gender -->
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
                         <Label text="Gender" styleClass="field-label" />
                         <ComboBox fx:id="genderComboBox" styleClass="detail-combo"
                                   promptText="Select gender" />
                     </VBox>
 
-                    <!-- ID Number -->
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Omanq / Passport number" styleClass="field-label" />
+                        <Label text="Omang / Passport Number" styleClass="field-label" />
                         <TextField fx:id="idNumberField" styleClass="detail-field"
                                    promptText="Enter ID or passport number" />
                     </VBox>
                 </HBox>
 
-                <!-- Third Row -->
+                <!-- Row 3 -->
                 <HBox alignment="TOP_LEFT" spacing="40">
-                    <!-- Account Count -->
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Number of accounts associated with user" styleClass="field-label" />
+                        <Label text="Number of Accounts" styleClass="field-label" />
                         <TextField fx:id="accountCountField" styleClass="detail-field"
                                    promptText="0" editable="false" />
                     </VBox>
 
-                    <!-- Other Info (if needed) -->
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Other information" styleClass="field-label" />
+                        <Label text="Other Information" styleClass="field-label" />
                         <TextField fx:id="otherInfoField" styleClass="detail-field"
                                    promptText="Additional details" />
                     </VBox>
@@ -127,8 +121,8 @@
 
     <bottom>
         <!-- Footer -->
-        <VBox alignment="CENTER" spacing="8" styleClass="footer">
-            <Text text="© 2025 Seqiba Financial. All rights reserved." styleClass="footer-text" />
+        <VBox alignment="CENTER" spacing="10" styleClass="footer">
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
             <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
                        onAction="#handleTermsAndConditions" />
         </VBox>

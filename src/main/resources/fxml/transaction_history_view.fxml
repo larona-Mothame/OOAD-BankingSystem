@@ -1,0 +1,109 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controllers.TransactionHistoryController"
+            stylesheets="@"
+            prefWidth="1000" prefHeight="700">
+
+    <top>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fx:id="companyLogo" fitWidth="40" fitHeight="40" preserveRatio="true">
+                    <Image url="@" />
+                </ImageView>
+                <Text text="Sediba Financial" styleClass="company-name" />
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <VBox alignment="CENTER_RIGHT" spacing="5">
+                <Text text="Transaction Reports" styleClass="greeting" />
+                <Text fx:id="usernameText" text="[Username]" styleClass="username-header" />
+            </VBox>
+
+            <Button text="Back to Dashboard" styleClass="back-button" onAction="#handleBackToDashboard" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 25 40 25 40;">
+            <!-- Filter & Search Section -->
+            <VBox alignment="CENTER_LEFT" spacing="15" styleClass="lookup-section">
+                <Text text="Filter Transactions" styleClass="section-title" />
+
+                <HBox alignment="CENTER_LEFT" spacing="20">
+                    <!-- Account Number -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Account Number" styleClass="field-label" />
+                        <TextField fx:id="accountNumberField" styleClass="detail-field"
+                                   promptText="Enter account number" />
+                    </VBox>
+
+                    <!-- Transaction Type -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Transaction Type" styleClass="field-label" />
+                        <ComboBox fx:id="transactionTypeCombo" styleClass="detail-combo"
+                                  promptText="All" />
+                    </VBox>
+
+                    <!-- Date Range -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="From Date" styleClass="field-label" />
+                        <DatePicker fx:id="fromDatePicker" />
+                    </VBox>
+
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="To Date" styleClass="field-label" />
+                        <DatePicker fx:id="toDatePicker" />
+                    </VBox>
+
+                    <!-- Search Button -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text=" " />
+                        <Button text="Search" styleClass="search-button" onAction="#handleSearch" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- Results Table -->
+            <VBox alignment="TOP_CENTER" spacing="15" styleClass="details-section">
+                <Text text="Transaction History" styleClass="section-title" />
+                <TableView fx:id="transactionTable" prefHeight="400" styleClass="results-table">
+                    <columns>
+                        <TableColumn text="Transaction ID" prefWidth="150" />
+                        <TableColumn text="Date" prefWidth="150" />
+                        <TableColumn text="Type" prefWidth="120" />
+                        <TableColumn text="Account Number" prefWidth="150" />
+                        <TableColumn text="Amount (USD)" prefWidth="150" />
+                        <TableColumn text="Balance After" prefWidth="150" />
+                        <TableColumn text="Reference" prefWidth="200" />
+                    </columns>
+                </TableView>
+            </VBox>
+
+            <!-- Export Buttons -->
+            <HBox alignment="CENTER" spacing="25" style="-fx-padding: 10 0 0 0;">
+                <Button text="Export to CSV" styleClass="save-button" onAction="#handleExportCSV" />
+                <Button text="Print Report" styleClass="update-button" onAction="#handlePrintReport" />
+                <Button text="Clear Filters" styleClass="back-button" onAction="#handleClearFilters" />
+            </HBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="8" styleClass="footer">
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
+            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
+                       onAction="#handleTermsAndConditions" />
+        </VBox>
+    </bottom>
+</BorderPane>

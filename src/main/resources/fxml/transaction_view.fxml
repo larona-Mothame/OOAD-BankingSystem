@@ -1,0 +1,128 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controllers.TransactionController"
+            stylesheets="@style.css"
+            prefWidth="900" prefHeight="700">
+
+    <top>
+        <!-- Header -->
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
+            <HBox alignment="CENTER_LEFT" spacing="10">
+                <ImageView fx:id="companyLogo" fitWidth="40" fitHeight="40" preserveRatio="true">
+                    <Image url="@sediba-logo.png" />
+                </ImageView>
+                <Text text="Sediba Financial" styleClass="company-name" />
+            </HBox>
+
+            <Region HBox.hgrow="ALWAYS" />
+
+            <VBox alignment="CENTER_RIGHT" spacing="5">
+                <Text text="Good Day" styleClass="greeting" />
+                <Text fx:id="usernameText" text="[Username]" styleClass="username-header" />
+            </VBox>
+
+            <Button text="Logout" styleClass="logout-button" onAction="#handleLogout" />
+        </HBox>
+    </top>
+
+    <center>
+        <VBox alignment="TOP_CENTER" spacing="30" style="-fx-padding: 25 40 25 40;">
+            <!-- Account Lookup -->
+            <VBox alignment="CENTER_LEFT" spacing="15" styleClass="lookup-section">
+                <Text text="Find Account" styleClass="section-title" />
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <TextField fx:id="accountSearchField" styleClass="search-field"
+                               promptText="Enter account number..." />
+                    <Button text="Search" styleClass="search-button" onAction="#handleSearchAccount" />
+                </HBox>
+            </VBox>
+
+            <!-- Account Summary -->
+            <VBox alignment="CENTER_LEFT" spacing="15" styleClass="details-section">
+                <Text text="Account Summary" styleClass="section-title" />
+
+                <HBox alignment="TOP_LEFT" spacing="60">
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Account Holder:" styleClass="detail-label" />
+                        <Text fx:id="accountHolderText" text="-" styleClass="detail-value" />
+                    </VBox>
+
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Account Number:" styleClass="detail-label" />
+                        <Text fx:id="accountNumberText" text="-" styleClass="detail-value" />
+                    </VBox>
+
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Current Balance:" styleClass="detail-label" />
+                        <Text fx:id="balanceText" text="0.00" styleClass="detail-value" />
+                    </VBox>
+                </HBox>
+            </VBox>
+
+            <!-- Transaction Section -->
+            <VBox alignment="CENTER_LEFT" spacing="25" styleClass="transaction-section">
+                <Text text="Perform Transaction" styleClass="section-title" />
+
+                <HBox alignment="CENTER_LEFT" spacing="40">
+                    <!-- Transaction Type -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Transaction Type" styleClass="field-label" />
+                        <ComboBox fx:id="transactionTypeCombo" styleClass="detail-combo"
+                                  promptText="Select type" />
+                    </VBox>
+
+                    <!-- Amount -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Amount (USD)" styleClass="field-label" />
+                        <TextField fx:id="amountField" styleClass="detail-field"
+                                   promptText="Enter amount" />
+                    </VBox>
+
+                    <!-- Reference -->
+                    <VBox alignment="CENTER_LEFT" spacing="8">
+                        <Label text="Reference / Note" styleClass="field-label" />
+                        <TextField fx:id="referenceField" styleClass="detail-field"
+                                   promptText="Enter optional note" />
+                    </VBox>
+                </HBox>
+
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER_LEFT" spacing="30" style="-fx-padding: 15 0 0 0;">
+                    <Button text="Confirm Transaction" styleClass="save-button" onAction="#handleConfirmTransaction" />
+                    <Button text="Clear" styleClass="update-button" onAction="#handleClear" />
+                </HBox>
+            </VBox>
+
+            <!-- Transaction Log Table -->
+            <VBox alignment="TOP_CENTER" spacing="15" styleClass="details-section" style="-fx-padding: 25 0 0 0;">
+                <Text text="Recent Transactions" styleClass="section-title" />
+                <TableView fx:id="transactionTable" prefHeight="200" styleClass="results-table">
+                    <columns>
+                        <TableColumn text="Date" prefWidth="150" />
+                        <TableColumn text="Type" prefWidth="100" />
+                        <TableColumn text="Amount (USD)" prefWidth="150" />
+                        <TableColumn text="Balance After" prefWidth="150" />
+                        <TableColumn text="Reference" prefWidth="200" />
+                    </columns>
+                </TableView>
+            </VBox>
+        </VBox>
+    </center>
+
+    <bottom>
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="8" styleClass="footer">
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
+            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
+                       onAction="#handleTermsAndConditions" />
+        </VBox>
+    </bottom>
+</BorderPane>

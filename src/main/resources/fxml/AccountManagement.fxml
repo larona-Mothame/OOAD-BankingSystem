@@ -1,0 +1,238 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<?import javafx.scene.control.cell.PropertyValueFactory?>
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controllers.CustomerDashboardController"
+            stylesheets="@"
+            prefWidth="1200" prefHeight="800">
+
+    <top>
+        <!-- Header Section -->
+        <VBox styleClass="dashboard-header" spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+                        <Image url="@" />
+                    </ImageView>
+                    <Text text="Sediba Financial" styleClass="company-name" />
+                </HBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <VBox alignment="CENTER_RIGHT" spacing="2">
+                    <Text text="Welcome back" styleClass="dashboard-greeting" />
+                    <Text fx:id="customerNameText" text="[Customer Name]" styleClass="dashboard-username" />
+                </VBox>
+
+                <Button text="Logout" styleClass="logout-button" onAction="#handleLogout" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <SplitPane dividerPositions="0.7" style="-fx-background-color: transparent;">
+            <!-- Left Pane: Accounts and Quick Actions -->
+            <VBox spacing="20" style="-fx-padding: 20;">
+                <!-- Account Summary -->
+                <VBox alignment="TOP_LEFT" spacing="15" styleClass="details-section">
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <Text text="Account Summary" styleClass="lookup-section-title" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Label fx:id="totalBalanceLabel" text="Total: $0.00" styleClass="success"
+                               style="-fx-padding: 5 10 5 10; -fx-background-radius: 15; -fx-font-weight: bold;" />
+                    </HBox>
+
+                    <!-- Quick Stats -->
+                    <HBox alignment="CENTER" spacing="30" styleClass="flex-wrap">
+                        <VBox alignment="CENTER" spacing="5" styleClass="account-card">
+                            <Text text="Accounts" styleClass="responsive-text-sm" />
+                            <Text fx:id="totalAccountsText" text="0" styleClass="account-type" />
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="5" styleClass="account-card">
+                            <Text text="This Month" styleClass="responsive-text-sm" />
+                            <Text fx:id="monthlySpendingText" text="0.00" styleClass="account-type" />
+                        </VBox>
+                        <VBox alignment="CENTER" spacing="5" styleClass="action-card">
+                            <Text text="Recent" styleClass="responsive-text-sm" />
+                            <Text fx:id="lastTransactionText" text="No transactions" styleClass="action-type" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Your Accounts Section -->
+                <VBox alignment="TOP_LEFT" spacing="15" styleClass="details-section">
+                    <Text text="Your Accounts" styleClass="lookup-section-title" />
+
+                    <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-max-height: 300;">
+                        <VBox spacing="10" fx:id="accountsContainer">
+                            <!-- Accounts will be dynamically added here -->
+                            <Label text="Loading your accounts..." styleClass="detail-label" />
+                        </VBox>
+                    </ScrollPane>
+                </VBox>
+
+                <!-- Quick Actions -->
+                <VBox alignment="TOP_LEFT" spacing="15" styleClass="details-section">
+                    <Text text="Quick Actions" styleClass="lookup-section-title" />
+
+                    <HBox alignment="CENTER" spacing="15" styleClass="flex-wrap">
+                        <Button text="Transfer Funds" styleClass="action-button btn-responsive"
+                                onAction="#handleTransfer" />
+                        <Button text="Pay Bills" styleClass="action-button btn-responsive"
+                                onAction="#handlePayBills" />
+                        <Button text="Account Settings" styleClass="action-button-secondary btn-responsive"
+                                onAction="#handleAccountSettings" />
+                        <Button text="Contact Support" styleClass="update-button btn-responsive"
+                                onAction="#handleContactSupport" />
+                    </HBox>
+                </VBox>
+            </VBox>
+
+            <!-- Right Pane: Transaction Interface -->
+            <VBox spacing="20" style="-fx-padding: 20;">
+                <!-- Transaction Panel -->
+                <VBox alignment="TOP_LEFT" spacing="15" styleClass="details-section"
+                      fx:id="transactionPanel" visible="false">
+                    <HBox alignment="CENTER_LEFT" spacing="10">
+                        <Text fx:id="transactionTitle" text="Transaction" styleClass="lookup-section-title" />
+                        <Region HBox.hgrow="ALWAYS" />
+                        <Button text="Close" styleClass="back-button" onAction="#handleCloseTransaction" />
+                    </HBox>
+
+                    <!-- Selected Account Info -->
+                    <VBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 10; -fx-background-color: #f8f9fa; -fx-background-radius: 8;">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Text text="Selected Account:" styleClass="detail-label" />
+                            <Text fx:id="selectedAccountText" text="No account selected" styleClass="detail-value" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <Text text="Available Balance:" styleClass="detail-label" />
+                            <Text fx:id="selectedBalanceText" text="0.00" styleClass="detail-value" />
+                        </HBox>
+                    </VBox>
+
+                    <!-- Transaction Form -->
+                    <VBox alignment="TOP_LEFT" spacing="15" fx:id="transactionForm">
+                        <!-- Amount Input -->
+                        <VBox alignment="TOP_LEFT" spacing="8">
+                            <Label text="Amount *" styleClass="detail-label" />
+                            <TextField fx:id="amountField" styleClass="customer-detail-field w-full"
+                                       promptText="0.00" />
+                        </VBox>
+
+                        <!-- Description -->
+                        <VBox alignment="TOP_LEFT" spacing="8">
+                            <Label text="Description" styleClass="detail-label" />
+                            <TextField fx:id="descriptionField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter transaction description" />
+                        </VBox>
+
+                        <!-- For Transfers Only -->
+                        <VBox alignment="TOP_LEFT" spacing="8" fx:id="transferSection" visible="false">
+                            <Label text="To Account *" styleClass="detail-label" />
+                            <ComboBox fx:id="transferAccountComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select destination account" />
+                        </VBox>
+
+                        <!-- Action Buttons -->
+                        <HBox alignment="CENTER" spacing="15" style="-fx-padding: 10 0 0 0;">
+                            <Button text="Cancel" styleClass="update-button btn-responsive"
+                                    onAction="#handleCancelTransaction" />
+                            <Button text="Confirm" styleClass="save-button btn-responsive"
+                                    onAction="#handleConfirmTransaction" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Recent Transactions -->
+                <VBox alignment="TOP_LEFT" spacing="15" styleClass="details-section">
+                    <Text text="Recent Transactions" styleClass="lookup-section-title" />
+
+                    <HBox alignment="CENTER_LEFT" spacing="15">
+                        <ComboBox fx:id="transactionFilterComboBox" styleClass="customer-detail-combo"
+                                  promptText="All Accounts" />
+                        <Button text="View All" styleClass="back-button" onAction="#handleViewAllTransactions" />
+                    </HBox>
+
+                    <TableView fx:id="transactionsTable" styleClass="responsive-table w-full"
+                               prefHeight="300">
+                        <columns>
+                            <TableColumn text="Date" prefWidth="100">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="date" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Description" prefWidth="200">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="description" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Account" prefWidth="120">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="account" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Amount" prefWidth="100">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="amount" />
+                                </cellValueFactory>
+                            </TableColumn>
+                            <TableColumn text="Balance" prefWidth="100">
+                                <cellValueFactory>
+                                    <PropertyValueFactory property="balance" />
+                                </cellValueFactory>
+                            </TableColumn>
+                        </columns>
+                    </TableView>
+                </VBox>
+
+                <!-- Placeholder when no transaction panel is open -->
+                <VBox alignment="CENTER" spacing="15" styleClass="details-section"
+                      fx:id="welcomePanel" visible="true">
+                    <ImageView fitWidth="80" fitHeight="80" preserveRatio="true">
+                        <Image url="@" />
+                    </ImageView>
+                    <Text text="Welcome to Your Dashboard" styleClass="lookup-section-title" />
+                    <Text text="Select an account to deposit, withdraw, or view transactions"
+                          styleClass="detail-label" style="-fx-text-alignment: center;" />
+                    <VBox alignment="CENTER_LEFT" spacing="10" style="-fx-padding: 20 0 0 0;">
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                                <Image url="@" />
+                            </ImageView>
+                            <Text text="Click Deposit to add funds to your account" styleClass="responsive-text-sm" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                                <Image url="@" />
+                            </ImageView>
+                            <Text text="Click Withdraw to take out money" styleClass="responsive-text-sm" />
+                        </HBox>
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <ImageView fitWidth="20" fitHeight="20" preserveRatio="true">
+                                <Image url="@" />
+                            </ImageView>
+                            <Text text="Click Transactions to view your account history" styleClass="responsive-text-sm" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+            </VBox>
+        </SplitPane>
+    </center>
+
+    <bottom>
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="8" styleClass="footer">
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
+            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
+                       onAction="#handleTermsAndConditions" />
+        </VBox>
+    </bottom>
+</BorderPane>

@@ -1,0 +1,305 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<?xml version="1.0" encoding="UTF-8"?>
+
+<?import javafx.scene.control.*?>
+<?import javafx.scene.layout.*?>
+<?import javafx.scene.text.*?>
+<?import javafx.scene.image.*?>
+<?import javafx.geometry.Insets?>
+
+<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
+            xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controllers.AccountOpeningController"
+            stylesheets="@"
+            prefWidth="1000" prefHeight="800">
+
+
+    <top>
+        <!-- Header Section -->
+        <VBox styleClass="dashboard-header" spacing="10">
+            <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
+                <HBox alignment="CENTER_LEFT" spacing="15">
+                    <ImageView fitWidth="35" fitHeight="35" preserveRatio="true">
+                        <Image url="@" />
+                    </ImageView>
+                    <Text text="Sediba Financial" styleClass="company-name" />
+                </HBox>
+
+                <Region HBox.hgrow="ALWAYS" />
+
+                <VBox alignment="CENTER_RIGHT" spacing="2">
+                    <Text text="New Account Application" styleClass="dashboard-greeting" />
+                    <Text fx:id="currentUserText" text="Agent: [Username]" styleClass="dashboard-username" />
+                </VBox>
+
+                <Button text="Back to Dashboard" styleClass="back-button" onAction="#handleBackToDashboard" />
+            </HBox>
+        </VBox>
+    </top>
+
+    <center>
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-padding: 20;">
+            <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 10;">
+                <!-- Progress Indicator -->
+                <VBox alignment="CENTER" spacing="15" styleClass="lookup-section">
+                    <Text text="Account Opening Process" styleClass="lookup-section-title" />
+                    <HBox alignment="CENTER" spacing="10">
+                        <Label text="1. Personal Details" styleClass="success" style="-fx-padding: 8 15 8 15; -fx-background-radius: 20;" />
+                        <Label text="2. Contact Information" styleClass="detail-label" style="-fx-padding: 8 15 8 15; -fx-background-color: #e0e0e0; -fx-background-radius: 20;" />
+                        <Label text="3. Account Selection" styleClass="detail-label" style="-fx-padding: 8 15 8 15; -fx-background-color: #e0e0e0; -fx-background-radius: 20;" />
+                        <Label text="4. Review & Submit" styleClass="detail-label" style="-fx-padding: 8 15 8 15; -fx-background-color: #e0e0e0; -fx-background-radius: 20;" />
+                    </HBox>
+                </VBox>
+
+                <!-- Personal Information Section -->
+                <VBox alignment="TOP_LEFT" spacing="20" styleClass="details-section">
+                    <Text text="Personal Information" styleClass="lookup-section-title" />
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- First Name -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="First Name *" styleClass="detail-label" />
+                            <TextField fx:id="firstNameField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter first name" />
+                        </VBox>
+
+                        <!-- Last Name -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Last Name *" styleClass="detail-label" />
+                            <TextField fx:id="lastNameField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter last name" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Date of Birth -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Date of Birth *" styleClass="detail-label" />
+                            <DatePicker fx:id="dateOfBirthPicker" styleClass="w-full"
+                                        promptText="Select date of birth" />
+                        </VBox>
+
+                        <!-- Gender -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Gender *" styleClass="detail-label" />
+                            <ComboBox fx:id="genderComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select gender" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- ID Type -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="ID Type *" styleClass="detail-label" />
+                            <ComboBox fx:id="idTypeComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select ID type" />
+                        </VBox>
+
+                        <!-- ID Number -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="ID Number *" styleClass="detail-label" />
+                            <TextField fx:id="idNumberField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter ID number" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Nationality -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Nationality *" styleClass="detail-label" />
+                            <TextField fx:id="nationalityField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter nationality" />
+                        </VBox>
+
+                        <!-- Marital Status -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Marital Status" styleClass="detail-label" />
+                            <ComboBox fx:id="maritalStatusComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select marital status" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Contact Information Section -->
+                <VBox alignment="TOP_LEFT" spacing="20" styleClass="details-section">
+                    <Text text="Contact Information" styleClass="lookup-section-title" />
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Email -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Email Address *" styleClass="detail-label" />
+                            <TextField fx:id="emailField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter email address" />
+                        </VBox>
+
+                        <!-- Phone Number -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Phone Number *" styleClass="detail-label" />
+                            <TextField fx:id="phoneField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter phone number" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Address Line 1 -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Address Line 1 *" styleClass="detail-label" />
+                            <TextField fx:id="addressLine1Field" styleClass="customer-detail-field w-full"
+                                       promptText="Enter street address" />
+                        </VBox>
+
+                        <!-- Address Line 2 -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Address Line 2" styleClass="detail-label" />
+                            <TextField fx:id="addressLine2Field" styleClass="customer-detail-field w-full"
+                                       promptText="Apartment, suite, etc." />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- City -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 200;">
+                            <Label text="City *" styleClass="detail-label" />
+                            <TextField fx:id="cityField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter city" />
+                        </VBox>
+
+                        <!-- State/Province -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 200;">
+                            <Label text="State/Province *" styleClass="detail-label" />
+                            <TextField fx:id="stateField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter state" />
+                        </VBox>
+
+                        <!-- ZIP/Postal Code -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 150;">
+                            <Label text="ZIP/Postal Code *" styleClass="detail-label" />
+                            <TextField fx:id="postalCodeField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter postal code" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Country -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Country *" styleClass="detail-label" />
+                            <ComboBox fx:id="countryComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select country" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Employment Information Section -->
+                <VBox alignment="TOP_LEFT" spacing="20" styleClass="details-section">
+                    <Text text="Employment Information" styleClass="lookup-section-title" />
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Employment Status -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Employment Status *" styleClass="detail-label" />
+                            <ComboBox fx:id="employmentStatusComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select employment status" />
+                        </VBox>
+
+                        <!-- Occupation -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Occupation" styleClass="detail-label" />
+                            <TextField fx:id="occupationField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter occupation" />
+                        </VBox>
+                    </HBox>
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Employer Name -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Employer Name" styleClass="detail-label" />
+                            <TextField fx:id="employerField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter employer name" />
+                        </VBox>
+
+                        <!-- Annual Income -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Annual Income (USD)" styleClass="detail-label" />
+                            <TextField fx:id="incomeField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter annual income" />
+                        </VBox>
+                    </HBox>
+                </VBox>
+
+                <!-- Account Selection Section -->
+                <VBox alignment="TOP_LEFT" spacing="20" styleClass="details-section">
+                    <Text text="Account Selection" styleClass="lookup-section-title" />
+
+                    <HBox alignment="TOP_LEFT" spacing="30" styleClass="flex-wrap">
+                        <!-- Account Type -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Account Type *" styleClass="detail-label" />
+                            <ComboBox fx:id="accountTypeComboBox" styleClass="customer-detail-combo w-full"
+                                      promptText="Select account type" />
+                        </VBox>
+
+                        <!-- Initial Deposit -->
+                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
+                            <Label text="Initial Deposit (USD) *" styleClass="detail-label" />
+                            <TextField fx:id="initialDepositField" styleClass="customer-detail-field w-full"
+                                       promptText="Enter amount" />
+                        </VBox>
+                    </HBox>
+
+                    <!-- Account Features -->
+                    <VBox alignment="TOP_LEFT" spacing="10">
+                        <Label text="Account Features (Optional)" styleClass="detail-label" />
+                        <HBox alignment="CENTER_LEFT" spacing="30" styleClass="flex-wrap">
+                            <CheckBox fx:id="debitCardCheck" text="Debit Card" />
+                            <CheckBox fx:id="onlineBankingCheck" text="Online Banking" />
+                            <CheckBox fx:id="mobileBankingCheck" text="Mobile Banking" />
+                            <CheckBox fx:id="overdraftProtectionCheck" text="Overdraft Protection" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Terms and Conditions -->
+                <VBox alignment="TOP_LEFT" spacing="15" styleClass="details-section">
+                    <Text text="Terms and Conditions" styleClass="lookup-section-title" />
+
+                    <VBox alignment="TOP_LEFT" spacing="10" style="-fx-pref-width: 100%;">
+                        <Text text="Please review and accept the following:" styleClass="detail-label" />
+
+                        <TextArea styleClass="w-full" prefRowCount="4"
+                                  text="By opening an account with Sediba Financial, you agree to our terms and conditions. This includes fees, interest rates, and account maintenance policies. Please read the complete terms and conditions document for detailed information."
+                                  editable="false" />
+
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <CheckBox fx:id="termsAcceptCheck" text="I have read and accept the Terms and Conditions" />
+                            <Hyperlink text="View Full Terms and Conditions" onAction="#handleViewTerms" />
+                        </HBox>
+
+                        <HBox alignment="CENTER_LEFT" spacing="10">
+                            <CheckBox fx:id="privacyAcceptCheck" text="I agree to the Privacy Policy and data processing" />
+                            <Hyperlink text="View Privacy Policy" onAction="#handleViewPrivacy" />
+                        </HBox>
+                    </VBox>
+                </VBox>
+
+                <!-- Action Buttons -->
+                <HBox alignment="CENTER" spacing="30" style="-fx-padding: 20 0 30 0;">
+                    <Button text="Cancel" styleClass="update-button btn-responsive"
+                            onAction="#handleCancel" />
+                    <Button text="Save as Draft" styleClass="action-button-secondary btn-responsive"
+                            onAction="#handleSaveDraft" />
+                    <Button text="Submit Application" styleClass="save-button btn-responsive"
+                            onAction="#handleSubmit" />
+                </HBox>
+            </VBox>
+        </ScrollPane>
+    </center>
+
+    <bottom>
+        <!-- Footer -->
+        <VBox alignment="CENTER" spacing="8" styleClass="footer">
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
+            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
+                       onAction="#handleTermsAndConditions" />
+        </VBox>
+    </bottom>
+</BorderPane>

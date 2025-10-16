@@ -8,8 +8,8 @@
 
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.sectionfinancial.DashboardController"
-            stylesheets="@dashboard.css"
+            fx:controller="com.bankingsystem.controllers.TellerDashboardController"
+            stylesheets="@"
             prefWidth="800" prefHeight="600">
 
     <top>
@@ -17,9 +17,9 @@
         <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
             <HBox alignment="CENTER_LEFT" spacing="15">
                 <ImageView fx:id="companyLogo" fitWidth="40" fitHeight="40" preserveRatio="true">
-                    <Image url="@financial-icon.png" />
+                    <Image url="@" />
                 </ImageView>
-                <Text text="Section Financial" styleClass="company-name" />
+                <Text text="Sediba Financial" styleClass="company-name" />
             </HBox>
 
             <Region HBox.hgrow="ALWAYS" />
@@ -42,7 +42,7 @@
                     <VBox styleClass="account-card" alignment="CENTER" spacing="15"
                           onMouseClicked="#openChequingAccount">
                         <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@chequing-icon.png" />
+                            <Image url="@" />
                         </ImageView>
                         <Text text="Chequing" styleClass="account-type" />
                         <Text text="Manage daily transactions" styleClass="account-description" />
@@ -52,7 +52,7 @@
                     <VBox styleClass="account-card" alignment="CENTER" spacing="15"
                           onMouseClicked="#openSavingsAccount">
                         <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@savings-icon.png" />
+                            <Image url="@" />
                         </ImageView>
                         <Text text="Savings" styleClass="account-type" />
                         <Text text="Grow your money safely" styleClass="account-description" />
@@ -62,7 +62,7 @@
                     <VBox styleClass="account-card" alignment="CENTER" spacing="15"
                           onMouseClicked="#openInvestmentAccount">
                         <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@investment-icon.png" />
+                            <Image url="@" />
                         </ImageView>
                         <Text text="Investment" styleClass="account-type" />
                         <Text text="Build your wealth" styleClass="account-description" />
@@ -80,9 +80,9 @@
                 <HBox alignment="CENTER_LEFT" spacing="30">
                     <!-- Proceed Card -->
                     <VBox styleClass="action-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#proceedToCustomerManagement">
+                          onMouseClicked="#proceedCustomer">
                         <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@proceed-icon.png" />
+                            <Image url="@" />
                         </ImageView>
                         <Text text="Proceed" styleClass="action-type" />
                         <Text text="Continue customer operations" styleClass="action-description" />
@@ -90,9 +90,9 @@
 
                     <!-- Manage Card -->
                     <VBox styleClass="action-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#manageCustomers">
+                          onMouseClicked="#manageCustomer">
                         <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@manage-icon.png" />
+                            <Image url="@" />
                         </ImageView>
                         <Text text="Manage" styleClass="action-type" />
                         <Text text="Customer account management" styleClass="action-description" />
@@ -105,7 +105,7 @@
     <bottom>
         <!-- Footer -->
         <VBox alignment="CENTER" spacing="10" styleClass="footer">
-            <Text text="© 2025 Section Financial. All rights reserved." styleClass="footer-text" />
+            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
             <Hyperlink text="Terms and Conditions apply" styleClass="footer-link" />
         </VBox>
     </bottom>
