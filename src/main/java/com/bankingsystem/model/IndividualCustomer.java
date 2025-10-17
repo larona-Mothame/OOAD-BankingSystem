@@ -1,43 +1,46 @@
 package com.bankingsystem.model;
 
 import java.time.LocalDate;
-import java.util.Objects;
 
 /**
- * Individual customer.
+ * Represents an individual customer in the system.
  */
 public class IndividualCustomer extends Customer {
 
-    private final String nationalId;
-    private final LocalDate dateOfBirth;
+    private String nationalId;
+    private LocalDate dateOfBirth;
 
+    // Full constructor
     public IndividualCustomer(String name, String contactNumber, String email, String address,
                               String nationalId, LocalDate dateOfBirth) {
         super(name, contactNumber, email, address);
-        this.nationalId = Objects.requireNonNull(nationalId, "nationalId");
-        this.dateOfBirth = Objects.requireNonNull(dateOfBirth, "dateOfBirth");
+        this.nationalId = nationalId;
+        this.dateOfBirth = dateOfBirth;
+    }
+
+    // ✅ Lightweight constructor for login/session use
+    public IndividualCustomer(String name, String contactNumber, String email, String address) {
+        super(name, contactNumber, email, address);
     }
 
     public String getNationalId() {
         return nationalId;
     }
 
+    public void setNationalId(String nationalId) {
+        this.nationalId = nationalId;
+    }
+
     public LocalDate getDateOfBirth() {
         return dateOfBirth;
     }
 
-    @Override
-    public String getDisplayName() {
-        return name + " (ID: " + nationalId + ")";
+    public void setDateOfBirth(LocalDate dateOfBirth) {
+        this.dateOfBirth = dateOfBirth;
     }
 
     @Override
-    public String toString() {
-        return "IndividualCustomer{" +
-                "customerId='" + customerId + '\'' +
-                ", name='" + name + '\'' +
-                ", nationalId='" + nationalId + '\'' +
-                ", dateOfBirth=" + dateOfBirth +
-                '}';
+    public String getDisplayName() {
+        return getFullName() + " (Individual)";
     }
 }

@@ -5,6 +5,9 @@ import java.util.UUID;
 
 /**
  * Abstract base class for customers.
+ *
+ * Extended to support authentication and session management.
+ * Subclasses (IndividualCustomer, CompanyCustomer) may add more specific fields.
  */
 public abstract class Customer {
 
@@ -14,12 +17,24 @@ public abstract class Customer {
     protected String email;
     protected String address;
 
+    // Added for authentication and session management
+    protected String username;
+    protected String password;
+
     public Customer(String name, String contactNumber, String email, String address) {
         this.customerId = UUID.randomUUID().toString();
         this.name = Objects.requireNonNull(name, "name");
         this.contactNumber = contactNumber;
         this.email = email;
         this.address = address;
+    }
+
+    // Optional constructor if you ever initialize with username/password from DB
+    public Customer(String name, String contactNumber, String email, String address,
+                    String username, String password) {
+        this(name, contactNumber, email, address);
+        this.username = username;
+        this.password = password;
     }
 
     public String getCustomerId() {
@@ -58,6 +73,34 @@ public abstract class Customer {
         this.address = address;
     }
 
+    // --- Added for authentication ---
+
+    public String getUsername() {
+        return username;
+    }
+
+    public void setUsername(String username) {
+        this.username = username;
+    }
+
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    /**
+     * Full name or company name to be shown in session context.
+     */
+    public String getFullName() {
+        return name != null ? name : "Unnamed Customer";
+    }
+
+    /**
+     * Human-readable display for the customer.
+     */
     /**
      * Human-readable display for the customer.
      */
@@ -71,6 +114,7 @@ public abstract class Customer {
                 ", contactNumber='" + contactNumber + '\'' +
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
+                ", username='" + username + '\'' +
                 '}';
     }
 }

@@ -12,7 +12,7 @@ public class BankService {
     private final Bank bank;
 
     private BankService() {
-        this.bank = new Bank("Sediba Financial"); // you can change bank name as desired
+        this.bank = new Bank("Sediba Financial");
     }
 
     public static synchronized BankService getInstance() {
