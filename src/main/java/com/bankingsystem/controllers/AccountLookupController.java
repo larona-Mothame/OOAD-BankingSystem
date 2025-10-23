@@ -128,6 +128,11 @@ public class AccountLookupController {
         alert.showAndWait();
     }
 
+    public void handleViewFullProfile(ActionEvent actionEvent) {
+    }
+
+    public void handleTransactionHistory(ActionEvent actionEvent) {
+    }
 
 
     public static class AccountResult {

@@ -9,24 +9,21 @@
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.bankingsystem.controllers.TellerDashboardController"
-            stylesheets="@"
             prefWidth="800" prefHeight="600">
 
     <top>
         <!-- Header with logo and user info -->
-        <HBox styleClass="header" alignment="CENTER_LEFT" spacing="20">
+        <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-background-color: #1a2a6c; -fx-padding: 15;">
             <HBox alignment="CENTER_LEFT" spacing="15">
-                <ImageView fx:id="companyLogo" fitWidth="40" fitHeight="40" preserveRatio="true">
-                    <Image url="@" />
-                </ImageView>
-                <Text text="Sediba Financial" styleClass="company-name" />
+                <!-- Removed problematic ImageView -->
+                <Text text="Sediba Financial" style="-fx-fill: white; -fx-font-size: 20; -fx-font-weight: bold;" />
             </HBox>
 
             <Region HBox.hgrow="ALWAYS" />
 
             <VBox alignment="CENTER_RIGHT" spacing="5">
-                <Text text="Good Day" styleClass="greeting" />
-                <Text fx:id="usernameText" text="[Username]" styleClass="username" />
+                <Text text="Good Day" style="-fx-fill: #e0e0e0; -fx-font-size: 14;" />
+                <Text fx:id="usernameText" text="[Username]" style="-fx-fill: white; -fx-font-size: 16; -fx-font-weight: bold;" />
             </VBox>
         </HBox>
     </top>
@@ -34,68 +31,68 @@
     <center>
         <VBox alignment="TOP_CENTER" spacing="40" style="-fx-padding: 40;">
             <!-- Open New Account Section -->
-            <VBox alignment="CENTER_LEFT" spacing="20" styleClass="dashboard-section">
-                <Text text="Open new Account" styleClass="section-title" />
+            <VBox alignment="CENTER_LEFT" spacing="20">
+                <Text text="Open new Account" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
 
                 <HBox alignment="CENTER_LEFT" spacing="30">
                     <!-- Chequing Account Card -->
-                    <VBox styleClass="account-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#openChequingAccount">
-                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@" />
-                        </ImageView>
-                        <Text text="Chequing" styleClass="account-type" />
-                        <Text text="Manage daily transactions" styleClass="account-description" />
+                    <VBox alignment="CENTER" spacing="15"
+                          onMouseClicked="#openChequingAccount"
+                          style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-cursor: hand;">
+                        <!-- Removed problematic ImageView -->
+                        <Text text="●" style="-fx-font-size: 30; -fx-fill: #1a2a6c;" />
+                        <Text text="Chequing" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+                        <Text text="Manage daily transactions" style="-fx-font-size: 12; -fx-fill: #7f8c8d; -fx-text-alignment: center;" />
                     </VBox>
 
                     <!-- Savings Account Card -->
-                    <VBox styleClass="account-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#openSavingsAccount">
-                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@" />
-                        </ImageView>
-                        <Text text="Savings" styleClass="account-type" />
-                        <Text text="Grow your money safely" styleClass="account-description" />
+                    <VBox alignment="CENTER" spacing="15"
+                          onMouseClicked="#openSavingsAccount"
+                          style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-cursor: hand;">
+                        <!-- Removed problematic ImageView -->
+                        <Text text="●" style="-fx-font-size: 30; -fx-fill: #27ae60;" />
+                        <Text text="Savings" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+                        <Text text="Grow your money safely" style="-fx-font-size: 12; -fx-fill: #7f8c8d; -fx-text-alignment: center;" />
                     </VBox>
 
                     <!-- Investment Account Card -->
-                    <VBox styleClass="account-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#openInvestmentAccount">
-                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@" />
-                        </ImageView>
-                        <Text text="Investment" styleClass="account-type" />
-                        <Text text="Build your wealth" styleClass="account-description" />
+                    <VBox alignment="CENTER" spacing="15"
+                          onMouseClicked="#openInvestmentAccount"
+                          style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-cursor: hand;">
+                        <!-- Removed problematic ImageView -->
+                        <Text text="●" style="-fx-font-size: 30; -fx-fill: #e74c3c;" />
+                        <Text text="Investment" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+                        <Text text="Build your wealth" style="-fx-font-size: 12; -fx-fill: #7f8c8d; -fx-text-alignment: center;" />
                     </VBox>
                 </HBox>
             </VBox>
 
             <!-- Separator -->
-            <Separator styleClass="section-separator" />
+            <Separator style="-fx-background-color: #bdc3c7; -fx-padding: 10 0 10 0;" />
 
             <!-- Manage Customers Section -->
-            <VBox alignment="CENTER_LEFT" spacing="20" styleClass="dashboard-section">
-                <Text text="Manage Customers" styleClass="section-title" />
+            <VBox alignment="CENTER_LEFT" spacing="20">
+                <Text text="Manage Customers" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
 
                 <HBox alignment="CENTER_LEFT" spacing="30">
                     <!-- Proceed Card -->
-                    <VBox styleClass="action-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#proceedCustomer">
-                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@" />
-                        </ImageView>
-                        <Text text="Proceed" styleClass="action-type" />
-                        <Text text="Continue customer operations" styleClass="action-description" />
+                    <VBox alignment="CENTER" spacing="15"
+                          onMouseClicked="#proceedCustomer"
+                          style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-cursor: hand;">
+                        <!-- Removed problematic ImageView -->
+                        <Text text="→" style="-fx-font-size: 30; -fx-fill: #1a2a6c;" />
+                        <Text text="Proceed" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+                        <Text text="Continue customer operations" style="-fx-font-size: 12; -fx-fill: #7f8c8d; -fx-text-alignment: center;" />
                     </VBox>
 
                     <!-- Manage Card -->
-                    <VBox styleClass="action-card" alignment="CENTER" spacing="15"
-                          onMouseClicked="#manageCustomer">
-                        <ImageView fitWidth="50" fitHeight="50" preserveRatio="true">
-                            <Image url="@" />
-                        </ImageView>
-                        <Text text="Manage" styleClass="action-type" />
-                        <Text text="Customer account management" styleClass="action-description" />
+                    <VBox alignment="CENTER" spacing="15"
+                          onMouseClicked="#manageCustomer"
+                          style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10; -fx-cursor: hand;">
+                        <!-- Removed problematic ImageView -->
+                        <Text text="⚙" style="-fx-font-size: 30; -fx-fill: #1a2a6c;" />
+                        <Text text="Manage" style="-fx-font-size: 18; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+                        <Text text="Customer account management" style="-fx-font-size: 12; -fx-fill: #7f8c8d; -fx-text-alignment: center;" />
                     </VBox>
                 </HBox>
             </VBox>
@@ -104,9 +101,9 @@
 
     <bottom>
         <!-- Footer -->
-        <VBox alignment="CENTER" spacing="10" styleClass="footer">
-            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
-            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link" />
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15;">
+            <Text text="© 2025 Sediba Financial. All rights reserved." style="-fx-fill: #7f8c8d; -fx-font-size: 12;" />
+            <Hyperlink text="Terms and Conditions apply" style="-fx-text-fill: #1a2a6c; -fx-border-color: transparent;" />
         </VBox>
     </bottom>
 </BorderPane>

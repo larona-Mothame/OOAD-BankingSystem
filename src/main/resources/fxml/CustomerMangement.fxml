@@ -9,28 +9,26 @@
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.bankingsystem.controllers.CustomerProfileController"
-            stylesheets="@"
             prefWidth="850" prefHeight="700">
 
     <top>
         <!-- Header Section -->
-        <VBox styleClass="header" spacing="10">
+        <VBox spacing="10" style="-fx-background-color: #1a2a6c;">
             <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
                 <HBox alignment="CENTER_LEFT" spacing="15">
-                    <ImageView fx:id="companyLogo" fitWidth="35" fitHeight="35" preserveRatio="true">
-                        <Image url="@" />
-                    </ImageView>
-                    <Text text="Sediba Financial" styleClass="company-name" />
+                    <!-- Removed problematic ImageView -->
+                    <Text text="Sediba Financial" style="-fx-fill: white; -fx-font-size: 18; -fx-font-weight: bold;" />
                 </HBox>
 
                 <Region HBox.hgrow="ALWAYS" />
 
                 <VBox alignment="CENTER_RIGHT" spacing="2">
-                    <Text text="Good Day" styleClass="greeting" />
-                    <Text fx:id="usernameHeaderText" text="[Username]" styleClass="username-header" />
+                    <Text text="Good Day" style="-fx-fill: #e0e0e0; -fx-font-size: 12;" />
+                    <Text fx:id="usernameHeaderText" text="[Username]" style="-fx-fill: white; -fx-font-size: 16; -fx-font-weight: bold;" />
                 </VBox>
 
-                <Button text="Logout" styleClass="logout-button" onAction="#handleLogout" />
+                <Button text="Logout" onAction="#handleLogout"
+                        style="-fx-background-color: transparent; -fx-text-fill: white; -fx-border-color: white; -fx-border-radius: 5; -fx-padding: 5 15 5 15;" />
             </HBox>
         </VBox>
     </top>
@@ -38,93 +36,96 @@
     <center>
         <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 25 30 25 30;">
             <!-- Lookup Section -->
-            <VBox alignment="CENTER_LEFT" spacing="15" styleClass="lookup-section">
+            <VBox alignment="CENTER_LEFT" spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
                 <HBox alignment="CENTER_LEFT" spacing="30">
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 400;">
-                        <Label text="Lookup Account/Customer" styleClass="section-label" />
-                        <TextField fx:id="searchField" styleClass="search-field"
-                                   promptText="Enter customer name, account number, or ID..." />
+                        <Label text="Lookup Account/Customer" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <TextField fx:id="searchField" promptText="Enter customer name, account number, or ID..."
+                                   style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
                     </VBox>
 
                     <VBox alignment="CENTER_LEFT" spacing="8">
-                        <Label text=" " styleClass="section-label" />
+                        <Label text=" " style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
                         <HBox alignment="CENTER_LEFT" spacing="10">
-                            <Text fx:id="currentUserText" text="[Username]" styleClass="current-user" />
-                            <Hyperlink text="View All Customers" styleClass="view-all-link"
-                                       onAction="#handleViewAllCustomers" />
+                            <Text fx:id="currentUserText" text="[Username]" style="-fx-font-size: 14; -fx-fill: #2c3e50;" />
+                            <Hyperlink text="View All Customers" onAction="#handleViewAllCustomers"
+                                       style="-fx-text-fill: #1a2a6c;" />
                         </HBox>
                     </VBox>
 
-                    <Button text="Search" styleClass="search-button" onAction="#handleSearch" />
+                    <Button text="Search" onAction="#handleSearch"
+                            style="-fx-background-color: #1a2a6c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
                 </HBox>
             </VBox>
 
-            <Separator styleClass="main-separator" />
+            <Separator style="-fx-background-color: #bdc3c7; -fx-padding: 10 0 10 0;" />
 
             <!-- Customer Details Section -->
-            <VBox alignment="TOP_LEFT" spacing="25" styleClass="details-section">
-                <Text text="Customer Information" styleClass="section-title" />
+            <VBox alignment="TOP_LEFT" spacing="25" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
+                <Text text="Customer Information" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
 
                 <!-- Personal Information -->
                 <HBox alignment="TOP_LEFT" spacing="40">
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="First Name" styleClass="field-label" />
-                        <TextField fx:id="firstNameField" styleClass="detail-field"
-                                   promptText="Enter first name" />
+                        <Label text="First Name" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <TextField fx:id="firstNameField" promptText="Enter first name"
+                                   style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
                     </VBox>
 
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Last Name" styleClass="field-label" />
-                        <TextField fx:id="lastNameField" styleClass="detail-field"
-                                   promptText="Enter last name" />
+                        <Label text="Last Name" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <TextField fx:id="lastNameField" promptText="Enter last name"
+                                   style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
                     </VBox>
                 </HBox>
 
                 <!-- Row 2 -->
                 <HBox alignment="TOP_LEFT" spacing="40">
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Gender" styleClass="field-label" />
-                        <ComboBox fx:id="genderComboBox" styleClass="detail-combo"
-                                  promptText="Select gender" />
+                        <Label text="Gender" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <ComboBox fx:id="genderComboBox" promptText="Select gender"
+                                  style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
                     </VBox>
 
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Omang / Passport Number" styleClass="field-label" />
-                        <TextField fx:id="idNumberField" styleClass="detail-field"
-                                   promptText="Enter ID or passport number" />
+                        <Label text="Omang / Passport Number" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <TextField fx:id="idNumberField" promptText="Enter ID or passport number"
+                                   style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
                     </VBox>
                 </HBox>
 
                 <!-- Row 3 -->
                 <HBox alignment="TOP_LEFT" spacing="40">
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Number of Accounts" styleClass="field-label" />
-                        <TextField fx:id="accountCountField" styleClass="detail-field"
-                                   promptText="0" editable="false" />
+                        <Label text="Number of Accounts" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <TextField fx:id="accountCountField" promptText="0" editable="false"
+                                   style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5; -fx-background-color: #f8f9fa;" />
                     </VBox>
 
                     <VBox alignment="CENTER_LEFT" spacing="8" style="-fx-pref-width: 250;">
-                        <Label text="Other Information" styleClass="field-label" />
-                        <TextField fx:id="otherInfoField" styleClass="detail-field"
-                                   promptText="Additional details" />
+                        <Label text="Other Information" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
+                        <TextField fx:id="otherInfoField" promptText="Additional details"
+                                   style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
                     </VBox>
                 </HBox>
             </VBox>
 
             <!-- Action Buttons -->
             <HBox alignment="CENTER" spacing="30" style="-fx-padding: 20 0 0 0;">
-                <Button text="Update" styleClass="update-button" onAction="#handleUpdate" />
-                <Button text="Save" styleClass="save-button" onAction="#handleSave" />
+                <Button text="Update" onAction="#handleUpdate"
+                        style="-fx-background-color: #1a2a6c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
+                <Button text="Save" onAction="#handleSave"
+                        style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
             </HBox>
         </VBox>
     </center>
 
     <bottom>
         <!-- Footer -->
-        <VBox alignment="CENTER" spacing="10" styleClass="footer">
-            <Text text="© 2025 Sediba Financial. All rights reserved." styleClass="footer-text" />
-            <Hyperlink text="Terms and Conditions apply" styleClass="footer-link"
-                       onAction="#handleTermsAndConditions" />
+        <VBox alignment="CENTER" spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15;">
+            <Text text="© 2025 Sediba Financial. All rights reserved." style="-fx-fill: #7f8c8d; -fx-font-size: 12;" />
+            <Hyperlink text="Terms and Conditions apply" onAction="#handleTermsAndConditions"
+                       style="-fx-text-fill: #1a2a6c; -fx-border-color: transparent;" />
         </VBox>
     </bottom>
 </BorderPane>
