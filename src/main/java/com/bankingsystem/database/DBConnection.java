@@ -5,7 +5,8 @@ import java.sql.DriverManager;
 import java.sql.SQLException;
 
 public class DBConnection {
-    private static final String URL = "jdbc:oracle:thin:@localhost:1521:XEPDB1";
+    // For PDB using service name (recommended)
+    private static final String URL = "jdbc:oracle:thin:@localhost:1521/XEPDB1";
     private static final String USER = "fire_lord";
     private static final String PASSWORD = "LaronaM182305";
 

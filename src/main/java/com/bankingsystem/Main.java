@@ -11,7 +11,7 @@ public class Main extends Application {
     @Override
     public void start(Stage primaryStage) throws IOException {
         SceneNavigator.setStage(primaryStage);
-        SceneNavigator.totransaction_history();
+        SceneNavigator.toLogin();
     }
 
     public static void main(String[] args) {

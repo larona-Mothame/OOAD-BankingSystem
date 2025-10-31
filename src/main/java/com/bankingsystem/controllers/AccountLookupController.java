@@ -1,5 +1,6 @@
 package com.bankingsystem.controllers;
 
+import com.bankingsystem.util.SceneNavigator;
 import javafx.beans.property.SimpleStringProperty;
 import javafx.beans.property.StringProperty;
 import javafx.fxml.FXML;
@@ -9,6 +10,8 @@ import javafx.scene.control.Alert.AlertType;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
 import javafx.event.ActionEvent;
+
+import java.io.IOException;
 
 
 public class AccountLookupController {
@@ -95,13 +98,17 @@ public class AccountLookupController {
         if (!validateSelection()) return;
         showAlert(AlertType.INFORMATION, "Edit Account", "Navigating to account edit view.");
     }
-
     @FXML
     private void handleBackToDashboard(ActionEvent event) {
-        showAlert(AlertType.INFORMATION, "Dashboard", "Returning to main teller dashboard.");
-        // TODO: Implement scene switch back to TellerDashboard.fxml
-    }
+        showAlert(AlertType.INFORMATION, "Navigation", "Returning to Teller Dashboard...");
 
+        try {
+            SceneNavigator.toTellerDashboard();
+        } catch (IOException e) {
+            showAlert(AlertType.ERROR, "Navigation Error", "Failed to load Teller Dashboard: " + e.getMessage());
+            e.printStackTrace();
+        }
+    }
     // =========================
     // Utility
     // =========================

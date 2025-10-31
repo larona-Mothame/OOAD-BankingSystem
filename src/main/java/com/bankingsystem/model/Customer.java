@@ -5,9 +5,6 @@ import java.util.UUID;
 
 /**
  * Abstract base class for customers.
- *
- * Extended to support authentication and session management.
- * Subclasses (IndividualCustomer, CompanyCustomer) may add more specific fields.
  */
 public abstract class Customer {
 
@@ -19,7 +16,8 @@ public abstract class Customer {
 
     // Added for authentication and session management
     protected String username;
-    protected String password;
+    protected String passwordHash; // Changed from password to passwordHash
+    protected boolean isActive;    // Added for account status
 
     public Customer(String name, String contactNumber, String email, String address) {
         this.customerId = UUID.randomUUID().toString();
@@ -27,14 +25,20 @@ public abstract class Customer {
         this.contactNumber = contactNumber;
         this.email = email;
         this.address = address;
+        this.isActive = true; // Default to active
     }
 
-    // Optional constructor if you ever initialize with username/password from DB
-    public Customer(String name, String contactNumber, String email, String address,
-                    String username, String password) {
-        this(name, contactNumber, email, address);
+    // Constructor for database loading
+    public Customer(String customerId, String name, String contactNumber, String email,
+                    String address, String username, String passwordHash, boolean isActive) {
+        this.customerId = customerId;
+        this.name = Objects.requireNonNull(name, "name");
+        this.contactNumber = contactNumber;
+        this.email = email;
+        this.address = address;
         this.username = username;
-        this.password = password;
+        this.passwordHash = passwordHash;
+        this.isActive = isActive;
     }
 
     public String getCustomerId() {
@@ -73,8 +77,7 @@ public abstract class Customer {
         this.address = address;
     }
 
-    // --- Added for authentication ---
-
+    // --- Authentication methods ---
     public String getUsername() {
         return username;
     }
@@ -83,12 +86,20 @@ public abstract class Customer {
         this.username = username;
     }
 
-    public String getPassword() {
-        return password;
+    public String getPasswordHash() {
+        return passwordHash;
     }
 
-    public void setPassword(String password) {
-        this.password = password;
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
     }
 
     /**
@@ -101,10 +112,14 @@ public abstract class Customer {
     /**
      * Human-readable display for the customer.
      */
-    /**
-     * Human-readable display for the customer.
-     */
     public abstract String getDisplayName();
+
+    /**
+     * Utility method to check if customer can login
+     */
+    public boolean canLogin() {
+        return isActive && passwordHash != null && !passwordHash.trim().isEmpty();
+    }
 
     @Override
     public String toString() {
@@ -115,6 +130,7 @@ public abstract class Customer {
                 ", email='" + email + '\'' +
                 ", address='" + address + '\'' +
                 ", username='" + username + '\'' +
+                ", isActive=" + isActive +
                 '}';
     }
 }

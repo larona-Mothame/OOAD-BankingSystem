@@ -7,16 +7,23 @@ import java.util.Objects;
  */
 public class CompanyCustomer extends Customer {
 
-    private final String companyRegistrationNumber;
-    private final String primaryContactPerson;
-    private final String companyName;
+    private String companyRegistrationNumber;
+    private String primaryContactPerson;
 
     public CompanyCustomer(String companyName, String companyRegistrationNumber,
                            String primaryContactPerson, String contactNumber,
                            String email, String address) {
         super(companyName, contactNumber, email, address);
-        this.companyName = Objects.requireNonNull(companyName, "companyName");
         this.companyRegistrationNumber = Objects.requireNonNull(companyRegistrationNumber, "companyRegistrationNumber");
+        this.primaryContactPerson = primaryContactPerson;
+    }
+
+    // Constructor for database loading
+    public CompanyCustomer(String customerId, String companyName, String contactNumber,
+                           String email, String address, String username, String passwordHash,
+                           boolean isActive, String companyRegistrationNumber, String primaryContactPerson) {
+        super(customerId, companyName, contactNumber, email, address, username, passwordHash, isActive);
+        this.companyRegistrationNumber = companyRegistrationNumber;
         this.primaryContactPerson = primaryContactPerson;
     }
 
@@ -29,20 +36,21 @@ public class CompanyCustomer extends Customer {
     }
 
     public String getCompanyName() {
-        return companyName;
+        return name; // Company name is stored in the name field
     }
 
     @Override
     public String getDisplayName() {
-        return companyName + " (Reg: " + companyRegistrationNumber + ")";
+        return name + " (Reg: " + companyRegistrationNumber + ")";
     }
 
     @Override
     public String toString() {
         return "CompanyCustomer{" +
                 "customerId='" + customerId + '\'' +
-                ", companyName='" + companyName + '\'' +
+                ", companyName='" + name + '\'' +
                 ", registrationNumber='" + companyRegistrationNumber + '\'' +
+                ", primaryContactPerson='" + primaryContactPerson + '\'' +
                 '}';
     }
 }

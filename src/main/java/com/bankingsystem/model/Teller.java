@@ -10,16 +10,28 @@ public class Teller {
     private String firstName;
     private String lastName;
     private String username;
-    private String password; // Optional; can omit when fetching from DB for security.
+    private String password;
+    private String passwordHash; // For database storage
+    private boolean isActive;    // To track if teller account is active
 
-    // --- Constructors ---
-    public Teller() {}
 
     public Teller(String tellerId, String firstName, String lastName, String username) {
         this.tellerId = tellerId;
         this.firstName = firstName;
         this.lastName = lastName;
         this.username = username;
+        this.isActive = true; // Default to active
+    }
+
+    // New constructor for database operations
+    public Teller(String tellerId, String firstName, String lastName, String username,
+                  String passwordHash, boolean isActive) {
+        this.tellerId = tellerId;
+        this.firstName = firstName;
+        this.lastName = lastName;
+        this.username = username;
+        this.passwordHash = passwordHash;
+        this.isActive = isActive;
     }
 
     // --- Getters & Setters ---
@@ -55,6 +67,30 @@ public class Teller {
         this.username = username;
     }
 
+    public String getPassword() {
+        return password;
+    }
+
+    public void setPassword(String password) {
+        this.password = password;
+    }
+
+    public String getPasswordHash() {
+        return passwordHash;
+    }
+
+    public void setPasswordHash(String passwordHash) {
+        this.passwordHash = passwordHash;
+    }
+
+    public boolean isActive() {
+        return isActive;
+    }
+
+    public void setActive(boolean active) {
+        isActive = active;
+    }
+
     public String getFullName() {
         return firstName + " " + lastName;
     }
@@ -65,6 +101,18 @@ public class Teller {
                 "tellerId='" + tellerId + '\'' +
                 ", name='" + getFullName() + '\'' +
                 ", username='" + username + '\'' +
+                ", isActive=" + isActive +
                 '}';
     }
+
+    // Utility method to check if teller can login
+    public boolean canLogin() {
+        return isActive && passwordHash != null && !passwordHash.trim().isEmpty();
+    }
+
+    // Optional: Add a method to get display name (username or full name)
+    public String getDisplayName() {
+        return username != null ? username : getFullName();
+    }
+
 }
