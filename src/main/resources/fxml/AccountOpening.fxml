@@ -11,7 +11,6 @@
             prefWidth="1000" prefHeight="800">
 
     <top>
-        <!-- Header Section -->
         <VBox spacing="10" style="-fx-background-color: #1a2a6c;">
             <HBox alignment="CENTER_LEFT" spacing="20" style="-fx-padding: 15 30 10 30;">
                 <HBox alignment="CENTER_LEFT" spacing="15">
@@ -32,253 +31,147 @@
     </top>
 
     <center>
-        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-padding: 20;">
-            <VBox alignment="TOP_CENTER" spacing="25" style="-fx-padding: 10;">
+        <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-padding: 25;">
+            <VBox fx:id="stepContainer" alignment="TOP_CENTER" spacing="35">
 
-                <!-- Progress Indicator -->
-                <VBox alignment="CENTER" spacing="15" style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
-                    <Text text="Account Opening Process" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
-                    <HBox alignment="CENTER" spacing="10">
-                        <Label text="1. Personal" style="-fx-padding: 8 15 8 15; -fx-background-radius: 20; -fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold;" />
-                        <Label text="2. Contact" style="-fx-padding: 8 15 8 15; -fx-background-color: #e0e0e0; -fx-background-radius: 20; -fx-text-fill: #7f8c8d;" />
-                        <Label text="3. Account" style="-fx-padding: 8 15 8 15; -fx-background-color: #e0e0e0; -fx-background-radius: 20; -fx-text-fill: #7f8c8d;" />
-                        <Label text="4. Review" style="-fx-padding: 8 15 8 15; -fx-background-color: #e0e0e0; -fx-background-radius: 20; -fx-text-fill: #7f8c8d;" />
+                <!-- Progress -->
+                <VBox alignment="CENTER" spacing="15"
+                      style="-fx-background-color: white; -fx-border-color: #dcdcdc; -fx-background-radius: 12; -fx-border-radius: 12; -fx-padding: 25;">
+                    <Text text="Account Opening Process"
+                          style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
+                    <HBox spacing="12" alignment="CENTER">
+                        <Label fx:id="stepLabel1" text="1. Personal"
+                               style="-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                        <Label fx:id="stepLabel2" text="2. Contact"
+                               style="-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #ededed; -fx-text-fill: #7f8c8d;"/>
+                        <Label fx:id="stepLabel3" text="3. Account"
+                               style="-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #ededed; -fx-text-fill: #7f8c8d;"/>
+                        <Label fx:id="stepLabel4" text="4. Review"
+                               style="-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #ededed; -fx-text-fill: #7f8c8d;"/>
                     </HBox>
+
                 </VBox>
 
-                <!-- STEP 1: Personal Information -->
-                <VBox fx:id="step1Personal" alignment="TOP_LEFT" spacing="20"
-                      style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
-                    <Text text="Personal Information" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- First Name -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="First Name *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="firstNameField" promptText="Enter first name"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-
-                        <!-- Last Name -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Last Name *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="lastNameField" promptText="Enter last name"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- Date of Birth -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Date of Birth *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <DatePicker fx:id="dateOfBirthPicker" promptText="Select date of birth"
-                                        style="-fx-pref-width: 100%; -fx-pref-height: 35;" />
-                        </VBox>
-
-                        <!-- Gender -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Gender *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <ComboBox fx:id="genderComboBox" promptText="Select gender"
-                                      style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- ID Type -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="ID Type *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <ComboBox fx:id="idTypeComboBox" promptText="Select ID type"
-                                      style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-
-                        <!-- ID Number -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="ID Number *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="idNumberField" promptText="Enter ID number"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- Nationality -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Nationality *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="nationalityField" promptText="Enter nationality"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-                </VBox>
-
-                <!-- STEP 2: Contact Information -->
-                <VBox fx:id="step2Contact" alignment="TOP_LEFT" spacing="20" visible="false"
-                      style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
-                    <Text text="Contact Information" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- Email -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Email Address *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="emailField" promptText="Enter email address"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-
-                        <!-- Phone Number -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Phone Number *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="phoneField" promptText="Enter phone number"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- Address Line 1 -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Address Line 1 *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="addressLine1Field" promptText="Enter street address"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-
-                        <!-- Address Line 2 -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Address Line 2" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="addressLine2Field" promptText="Apartment, suite, etc."
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- City -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 200;">
-                            <Label text="City *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="cityField" promptText="Enter city"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-
-                        <!-- State/Province -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 200;">
-                            <Label text="State/Province *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="stateField" promptText="Enter state"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-
-                        <!-- ZIP/Postal Code -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 150;">
-                            <Label text="ZIP/Postal Code *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="postalCodeField" promptText="Enter postal code"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-                </VBox>
-
-                <!-- STEP 3: Account Information -->
-                <VBox fx:id="step3Account" alignment="TOP_LEFT" spacing="20" visible="false"
-                      style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
-                    <Text text="Account Information" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
-
-                    <HBox alignment="TOP_LEFT" spacing="30">
-                        <!-- Account Type -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Account Type *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <ComboBox fx:id="accountTypeComboBox" promptText="Select account type"
-                                      style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                            <Label fx:id="selectedAccountTypeLabel" text="" style="-fx-font-size: 12; -fx-text-fill: #3498db;" />
-                        </VBox>
-
-                        <!-- Initial Deposit -->
-                        <VBox alignment="TOP_LEFT" spacing="8" style="-fx-pref-width: 300;">
-                            <Label text="Initial Deposit (BWP) *" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                            <TextField fx:id="initialDepositField" promptText="Enter amount"
-                                       style="-fx-pref-width: 100%; -fx-pref-height: 35; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                        </VBox>
-                    </HBox>
-
-                    <!-- Account Features -->
-                    <VBox alignment="TOP_LEFT" spacing="10">
-                        <Label text="Account Features (Optional)" style="-fx-font-size: 14; -fx-text-fill: #2c3e50;" />
-                        <HBox alignment="CENTER_LEFT" spacing="30">
-                            <CheckBox fx:id="debitCardCheck" text="Debit Card" />
-                            <CheckBox fx:id="onlineBankingCheck" text="Online Banking" />
-                            <CheckBox fx:id="mobileBankingCheck" text="Mobile Banking" />
-                            <CheckBox fx:id="overdraftProtectionCheck" text="Overdraft Protection" />
-                        </HBox>
-                    </VBox>
-                </VBox>
-
-                <!-- STEP 4: Review & Submit -->
-                <VBox fx:id="step4Review" alignment="TOP_LEFT" spacing="20" visible="false"
-                      style="-fx-background-color: white; -fx-background-radius: 10; -fx-padding: 20; -fx-border-color: #bdc3c7; -fx-border-radius: 10;">
-                    <Text text="Review &amp; Submit" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
-
-                    <GridPane hgap="20" vgap="15">
+                <!-- STEP 1 -->
+                <VBox fx:id="step1Personal" spacing="22"
+                      style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-border-color: #dcdcdc; -fx-border-radius: 12;">
+                    <Text text="Personal Information"
+                          style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;"/>
+                    <GridPane hgap="25" vgap="18">
                         <columnConstraints>
-                            <ColumnConstraints prefWidth="200" />
-                            <ColumnConstraints prefWidth="300" />
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
                         </columnConstraints>
-
-                        <!-- Personal Info Review -->
-                        <Label text="Personal Information:" GridPane.columnIndex="0" GridPane.rowIndex="0"
-                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
-                        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="0">
-                            <TextField fx:id="reviewFirstName" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                            <TextField fx:id="reviewLastName" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                            <TextField fx:id="reviewIdNumber" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                        </VBox>
-
-                        <!-- Contact Info Review -->
-                        <Label text="Contact Information:" GridPane.columnIndex="0" GridPane.rowIndex="1"
-                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
-                        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="1">
-                            <TextField fx:id="reviewEmail" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                            <TextField fx:id="reviewPhone" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                        </VBox>
-
-                        <!-- Account Info Review -->
-                        <Label text="Account Information:" GridPane.columnIndex="0" GridPane.rowIndex="2"
-                               style="-fx-font-size: 14; -fx-font-weight: bold; -fx-text-fill: #2c3e50;" />
-                        <VBox spacing="5" GridPane.columnIndex="1" GridPane.rowIndex="2">
-                            <TextField fx:id="reviewAccountType" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                            <TextField fx:id="reviewInitialDeposit" editable="false"
-                                       style="-fx-background-color: #f8f9fa; -fx-border-color: #e0e0e0;" />
-                        </VBox>
+                        <Label text="First Name *" GridPane.rowIndex="0" />
+                        <TextField fx:id="firstNameField" GridPane.rowIndex="1"/>
+                        <Label text="Last Name *" GridPane.columnIndex="1" GridPane.rowIndex="0" />
+                        <TextField fx:id="lastNameField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Date of Birth *" GridPane.rowIndex="2"/>
+                        <DatePicker fx:id="dateOfBirthPicker" GridPane.rowIndex="3"/>
+                        <Label text="Gender *" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <ComboBox fx:id="genderComboBox" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="ID Type *" GridPane.rowIndex="4"/>
+                        <ComboBox fx:id="idTypeComboBox" GridPane.rowIndex="5"/>
+                        <Label text="ID Number *" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <TextField fx:id="idNumberField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <Label text="Nationality *" GridPane.rowIndex="6"/>
+                        <TextField fx:id="nationalityField" GridPane.rowIndex="7"/>
                     </GridPane>
-
-                    <!-- Terms and Conditions -->
-                    <VBox alignment="TOP_LEFT" spacing="10" style="-fx-padding: 15 0 0 0;">
-                        <Text text="Terms and Conditions" style="-fx-font-size: 16; -fx-font-weight: bold; -fx-fill: #2c3e50;" />
-
-                        <TextArea prefRowCount="3"
-                                  text="By submitting this application, you agree to Sediba Financial's Terms and Conditions and Privacy Policy. Your account will be subject to our standard fees and conditions."
-                                  editable="false"
-                                  style="-fx-pref-width: 100%; -fx-background-radius: 5; -fx-border-color: #bdc3c7; -fx-border-radius: 5;" />
-                    </VBox>
                 </VBox>
 
-                <!-- Navigation Buttons -->
-                <HBox alignment="CENTER" spacing="30" style="-fx-padding: 20 0 30 0;">
-                    <Button fx:id="backButton" text="Back" onAction="#handleBack"
-                            style="-fx-background-color: #95a5a6; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
-                    <Button text="Cancel" onAction="#handleCancel"
-                            style="-fx-background-color: #e74c3c; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
-                    <Button text="Save as Draft" onAction="#handleSaveDraft"
-                            style="-fx-background-color: transparent; -fx-text-fill: #1a2a6c; -fx-border-color: #1a2a6c; -fx-border-radius: 5; -fx-padding: 10 20 10 20;" />
-                    <Button fx:id="nextButton" text="Next" onAction="#handleNext"
-                            style="-fx-background-color: #3498db; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
-                    <Button fx:id="submitButton" text="Submit Application" onAction="#handleSubmit" visible="false"
-                            style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 5; -fx-padding: 10 20 10 20;" />
-                </HBox>
+                <!-- STEP 2 -->
+                <VBox fx:id="step2Contact" spacing="22" visible="false"
+                      style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-border-color: #dcdcdc; -fx-border-radius: 12;">
+                    <Text text="Contact Information"
+                          style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;"/>
+                    <GridPane hgap="25" vgap="18">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+                        <Label text="Email Address *" GridPane.rowIndex="0"/>
+                        <TextField fx:id="emailField" GridPane.rowIndex="1"/>
+                        <Label text="Phone Number *" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="Address Line 1 *" GridPane.rowIndex="2"/>
+                        <TextField fx:id="addressLine1Field" GridPane.rowIndex="3"/>
+                        <Label text="Address Line 2" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <TextField fx:id="addressLine2Field" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="City *" GridPane.rowIndex="4"/>
+                        <TextField fx:id="cityField" GridPane.rowIndex="5"/>
+                        <Label text="State/Province *" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <TextField fx:id="stateField" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <Label text="ZIP/Postal Code *" GridPane.rowIndex="6"/>
+                        <TextField fx:id="postalCodeField" GridPane.rowIndex="7"/>
+                    </GridPane>
+                </VBox>
+
+                <!-- STEP 3 -->
+                <VBox fx:id="step3Account" spacing="22" visible="false"
+                      style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-border-color: #dcdcdc; -fx-border-radius: 12;">
+                    <Text text="Account Information"
+                          style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;"/>
+                    <GridPane hgap="25" vgap="18">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+                        <Label text="Account Type *" GridPane.rowIndex="0"/>
+                        <VBox GridPane.rowIndex="1">
+                            <ComboBox fx:id="accountTypeComboBox"/>
+                            <Label fx:id="selectedAccountTypeLabel" style="-fx-text-fill: #3498db; -fx-font-size: 12;"/>
+                        </VBox>
+                        <Label text="Initial Deposit (BWP) *" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <TextField fx:id="initialDepositField" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                    </GridPane>
+                    <HBox spacing="25" alignment="CENTER_LEFT">
+                        <CheckBox fx:id="debitCardCheck" text="Debit Card"/>
+                        <CheckBox fx:id="onlineBankingCheck" text="Online Banking"/>
+                        <CheckBox fx:id="mobileBankingCheck" text="Mobile Banking"/>
+                        <CheckBox fx:id="overdraftProtectionCheck" text="Overdraft Protection"/>
+                    </HBox>
+                </VBox>
+
+                <!-- STEP 4 -->
+                <VBox fx:id="step4Review" spacing="22" visible="false"
+                      style="-fx-background-color: white; -fx-padding: 25; -fx-background-radius: 12; -fx-border-color: #dcdcdc; -fx-border-radius: 12;">
+                    <Text text="Review &amp; Submit"
+                          style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #2c3e50;"/>
+                    <GridPane hgap="25" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="35"/>
+                            <ColumnConstraints percentWidth="65"/>
+                        </columnConstraints>
+                        <Label text="First Name:" GridPane.rowIndex="0"/>
+                        <TextField fx:id="reviewFirstName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0"/>
+                        <Label text="Last Name:" GridPane.rowIndex="1"/>
+                        <TextField fx:id="reviewLastName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1"/>
+                        <Label text="ID Number:" GridPane.rowIndex="2"/>
+                        <TextField fx:id="reviewIdNumber" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2"/>
+                        <Label text="Email:" GridPane.rowIndex="3"/>
+                        <TextField fx:id="reviewEmail" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3"/>
+                        <Label text="Phone:" GridPane.rowIndex="4"/>
+                        <TextField fx:id="reviewPhone" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4"/>
+                        <Label text="Account Type:" GridPane.rowIndex="5"/>
+                        <TextField fx:id="reviewAccountType" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5"/>
+                        <Label text="Initial Deposit (BWP):" GridPane.rowIndex="6"/>
+                        <TextField fx:id="reviewInitialDeposit" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6"/>
+                    </GridPane>
+                </VBox>
+
             </VBox>
         </ScrollPane>
     </center>
 
     <bottom>
-        <!-- Footer -->
-        <VBox alignment="CENTER" spacing="8" style="-fx-background-color: #f8f9fa; -fx-padding: 15;">
+        <VBox spacing="10" style="-fx-background-color: #f8f9fa; -fx-padding: 15;">
+            <HBox alignment="CENTER_RIGHT" spacing="10">
+                <Button text="Cancel" onAction="#handleCancel"/>
+                <Button text="Save as Draft" onAction="#handleSaveDraft"/>
+                <Button fx:id="backButton" text="Back" onAction="#handleBack"/>
+                <Button fx:id="nextButton" text="Next" onAction="#handleNext"/>
+                <Button fx:id="submitButton" text="Submit Application" onAction="#handleSubmit" visible="false"/>
+            </HBox>
             <Text text="© 2025 Sediba Financial. All rights reserved." style="-fx-fill: #7f8c8d; -fx-font-size: 12;" />
             <HBox alignment="CENTER" spacing="15">
                 <Hyperlink text="Terms and Conditions" onAction="#handleViewTerms"

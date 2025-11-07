@@ -37,8 +37,6 @@ public class LoginController {
     @FXML
     private void initialize() {
         errorLabel.setVisible(false);
-
-        // Optional: Add Enter key support for login
         setupEnterKeySupport();
     }
 
@@ -113,7 +111,6 @@ public class LoginController {
         }
 
         SessionManager.setCurrentUser(teller, "TELLER");
-        showSuccessMessage("Welcome back, " + teller.getFullName() + "!");
         SceneNavigator.toTellerDashboard();
     }
 
@@ -127,7 +124,6 @@ public class LoginController {
         }
 
         SessionManager.setCurrentUser(customer, "CUSTOMER");
-        showSuccessMessage("Welcome back, " + customer.getDisplayName() + "!");
         SceneNavigator.toCustomerDashboard();
     }
 
@@ -143,13 +139,7 @@ public class LoginController {
         clearErrorAfterDelay();
     }
 
-    /**
-     * Show success message (optional)
-     */
-    private void showSuccessMessage(String message) {
-        // You could implement a success message display here
-        System.out.println("Login successful: " + message);
-    }
+
 
     /**
      * Clear error message
@@ -173,12 +163,5 @@ public class LoginController {
         }).start();
     }
 
-    /**
-     * Optional: Clear fields method
-     */
-    public void clearFields() {
-        usernameField.clear();
-        passwordField.clear();
-        clearError();
-    }
+
 }

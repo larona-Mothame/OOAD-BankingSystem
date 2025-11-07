@@ -4,28 +4,32 @@ import com.bankingsystem.service.AccountService;
 import com.bankingsystem.util.SceneNavigator;
 import com.bankingsystem.util.SessionManager;
 import com.bankingsystem.model.Teller;
+import javafx.collections.FXCollections;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-import javafx.collections.FXCollections;
-import javafx.event.ActionEvent;
-import java.time.LocalDate;
+
 import java.math.BigDecimal;
+import java.time.LocalDate;
+import java.util.Random;
 
 public class AccountOpeningController {
 
-    // Header
     @FXML private Text currentUserText;
     @FXML private Text progressText;
 
-    // Step containers
+    @FXML private Label stepLabel1;
+    @FXML private Label stepLabel2;
+    @FXML private Label stepLabel3;
+    @FXML private Label stepLabel4;
+
     @FXML private VBox step1Personal;
     @FXML private VBox step2Contact;
     @FXML private VBox step3Account;
     @FXML private VBox step4Review;
 
-    // Navigation buttons
     @FXML private Button backButton;
     @FXML private Button nextButton;
     @FXML private Button submitButton;
@@ -52,6 +56,7 @@ public class AccountOpeningController {
     @FXML private ComboBox<String> accountTypeComboBox;
     @FXML private TextField initialDepositField;
     @FXML private Label selectedAccountTypeLabel;
+
     @FXML private TextField reviewFirstName;
     @FXML private TextField reviewLastName;
     @FXML private TextField reviewIdNumber;
@@ -76,11 +81,10 @@ public class AccountOpeningController {
         genderComboBox.setItems(FXCollections.observableArrayList("Male", "Female", "Other"));
         idTypeComboBox.setItems(FXCollections.observableArrayList("National ID (Omang)", "Passport", "Driver's License"));
         accountTypeComboBox.setItems(FXCollections.observableArrayList("Savings", "Investment", "Cheque"));
-        nationalityField.setText("Botswana"); // Default for your bank
+        nationalityField.setText("Botswana");
     }
 
     private void loadPreselectedAccountType() {
-        // Get account type from session or previous selection
         Object accountType = SessionManager.getAttribute("selectedAccountType");
         if (accountType != null) {
             preselectedAccountType = accountType.toString();
@@ -88,7 +92,6 @@ public class AccountOpeningController {
             selectedAccountTypeLabel.setText("Selected: " + preselectedAccountType);
         }
 
-        // Set current user
         Object currentUser = SessionManager.getCurrentUser();
         if (currentUser instanceof Teller) {
             Teller teller = (Teller) currentUser;
@@ -102,45 +105,50 @@ public class AccountOpeningController {
     }
 
     private void showStep(int step) {
-        // Hide all steps
-        step1Personal.setVisible(false);
-        step2Contact.setVisible(false);
-        step3Account.setVisible(false);
-        step4Review.setVisible(false);
+        step1Personal.setVisible(false); step1Personal.setManaged(false);
+        step2Contact.setVisible(false); step2Contact.setManaged(false);
+        step3Account.setVisible(false); step3Account.setManaged(false);
+        step4Review.setVisible(false); step4Review.setManaged(false);
 
-        // Show current step
         switch (step) {
-            case 1:
-                step1Personal.setVisible(true);
+            case 1 -> {
+                step1Personal.setVisible(true); step1Personal.setManaged(true);
                 progressText.setText("Step 1: Personal Information");
-                backButton.setDisable(true);
-                nextButton.setDisable(false);
-                submitButton.setVisible(false);
-                break;
-            case 2:
-                step2Contact.setVisible(true);
+                backButton.setDisable(true); nextButton.setDisable(false); submitButton.setVisible(false);
+            }
+            case 2 -> {
+                step2Contact.setVisible(true); step2Contact.setManaged(true);
                 progressText.setText("Step 2: Contact Information");
-                backButton.setDisable(false);
-                nextButton.setDisable(false);
-                submitButton.setVisible(false);
-                break;
-            case 3:
-                step3Account.setVisible(true);
+                backButton.setDisable(false); nextButton.setDisable(false); submitButton.setVisible(false);
+            }
+            case 3 -> {
+                step3Account.setVisible(true); step3Account.setManaged(true);
                 progressText.setText("Step 3: Account Information");
-                backButton.setDisable(false);
-                nextButton.setDisable(false);
-                submitButton.setVisible(false);
-                break;
-            case 4:
-                step4Review.setVisible(true);
+                backButton.setDisable(false); nextButton.setDisable(false); submitButton.setVisible(false);
+            }
+            case 4 -> {
+                step4Review.setVisible(true); step4Review.setManaged(true);
                 progressText.setText("Step 4: Review & Submit");
-                backButton.setDisable(false);
-                nextButton.setDisable(true);
-                submitButton.setVisible(true);
+                backButton.setDisable(false); nextButton.setDisable(true); submitButton.setVisible(true);
                 populateReviewSection();
-                break;
+            }
         }
         currentStep = step;
+        updateStepTracker(step);
+    }
+
+    private void updateStepTracker(int step) {
+        String completedStyle = "-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #2ecc71; -fx-text-fill: white;";
+        String currentStyle   = "-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #3498db; -fx-text-fill: white;";
+        String upcomingStyle  = "-fx-padding: 8 18; -fx-background-radius: 20; -fx-background-color: #ededed; -fx-text-fill: #7f8c8d;";
+
+        Label[] steps = {stepLabel1, stepLabel2, stepLabel3, stepLabel4};
+
+        for (int i = 0; i < steps.length; i++) {
+            if (i < step - 1) steps[i].setStyle(completedStyle);
+            else if (i == step - 1) steps[i].setStyle(currentStyle);
+            else steps[i].setStyle(upcomingStyle);
+        }
     }
 
     private void populateReviewSection() {
@@ -153,12 +161,9 @@ public class AccountOpeningController {
         reviewInitialDeposit.setText(initialDepositField.getText());
     }
 
-    // Navigation handlers
     @FXML
     private void handleNext(ActionEvent event) {
-        if (validateCurrentStep()) {
-            showStep(currentStep + 1);
-        }
+        if (validateCurrentStep()) showStep(currentStep + 1);
     }
 
     @FXML
@@ -174,73 +179,74 @@ public class AccountOpeningController {
     }
 
     private boolean validateCurrentStep() {
-        switch (currentStep) {
-            case 1:
-                return validatePersonalInfo();
-            case 2:
-                return validateContactInfo();
-            case 3:
-                return validateAccountInfo();
-            default:
-                return true;
-        }
+        return switch (currentStep) {
+            case 1 -> validatePersonalInfo();
+            case 2 -> validateContactInfo();
+            case 3 -> validateAccountInfo();
+            default -> true;
+        };
     }
 
     private boolean validatePersonalInfo() {
-        if (firstNameField.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "First name is required.", Alert.AlertType.WARNING);
+        String firstName = firstNameField.getText().trim();
+        String lastName = lastNameField.getText().trim();
+        String idNumber = idNumberField.getText().trim();
+        LocalDate dob = dateOfBirthPicker.getValue();
+        String gender = genderComboBox.getValue();
+
+        if (firstName.isEmpty()) { showAlert("Missing Information", "First name is required.", Alert.AlertType.WARNING); return false; }
+        if (lastName.isEmpty()) { showAlert("Missing Information", "Last name is required.", Alert.AlertType.WARNING); return false; }
+        if (dob == null) { showAlert("Missing Information", "Date of birth is required.", Alert.AlertType.WARNING); return false; }
+        if (gender == null) { showAlert("Missing Information", "Gender is required.", Alert.AlertType.WARNING); return false; }
+        if (idNumber.isEmpty()) { showAlert("Missing Information", "ID number is required.", Alert.AlertType.WARNING); return false; }
+
+        // ID format check
+        if (!idNumber.matches("\\d{9}")) {
+            showAlert("Invalid ID", "National ID must be exactly 9 digits.", Alert.AlertType.WARNING);
             return false;
         }
-        if (lastNameField.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "Last name is required.", Alert.AlertType.WARNING);
+
+        // Gender middle digit match
+        char middle = idNumber.charAt(4);
+        if ((gender.equals("Male") && middle != '1') || (gender.equals("Female") && middle != '2')) {
+            showAlert("Invalid ID", "Middle digit of ID does not match selected gender.", Alert.AlertType.WARNING);
             return false;
         }
-        if (idNumberField.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "ID number is required.", Alert.AlertType.WARNING);
+
+        // Uniqueness check
+        if (!accountService.isUniqueCustomer(idNumber, emailField.getText().trim(), phoneField.getText().trim())) {
+            showAlert("Duplicate Entry", "A customer with this ID, email, or phone number already exists.", Alert.AlertType.WARNING);
             return false;
         }
-        if (dateOfBirthPicker.getValue() == null) {
-            showAlert("Missing Information", "Date of birth is required.", Alert.AlertType.WARNING);
-            return false;
-        }
+
         return true;
     }
 
     private boolean validateContactInfo() {
-        if (emailField.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "Email address is required.", Alert.AlertType.WARNING);
-            return false;
+        String email = emailField.getText().trim();
+        String phone = phoneField.getText().trim();
+        String address1 = addressLine1Field.getText().trim();
+
+        if (email.isEmpty()) { showAlert("Missing Information", "Email address is required.", Alert.AlertType.WARNING); return false; }
+        if (!email.matches("^[A-Za-z0-9+_.-]+@[A-Za-z0-9.-]+$")) {
+            showAlert("Invalid Email", "Please enter a valid email address.", Alert.AlertType.WARNING); return false;
         }
-        if (phoneField.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "Phone number is required.", Alert.AlertType.WARNING);
-            return false;
-        }
-        if (addressLine1Field.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "Address is required.", Alert.AlertType.WARNING);
-            return false;
-        }
+        if (phone.isEmpty()) { showAlert("Missing Information", "Phone number is required.", Alert.AlertType.WARNING); return false; }
+        if (!phone.matches("\\d+")) { showAlert("Invalid Phone", "Phone number must contain only digits.", Alert.AlertType.WARNING); return false; }
+        if (address1.isEmpty()) { showAlert("Missing Information", "Address is required.", Alert.AlertType.WARNING); return false; }
+
         return true;
     }
 
     private boolean validateAccountInfo() {
-        if (accountTypeComboBox.getValue() == null) {
-            showAlert("Missing Information", "Account type is required.", Alert.AlertType.WARNING);
-            return false;
-        }
-        if (initialDepositField.getText().trim().isEmpty()) {
-            showAlert("Missing Information", "Initial deposit is required.", Alert.AlertType.WARNING);
-            return false;
-        }
+        if (accountTypeComboBox.getValue() == null) { showAlert("Missing Information", "Account type is required.", Alert.AlertType.WARNING); return false; }
+        if (initialDepositField.getText().trim().isEmpty()) { showAlert("Missing Information", "Initial deposit is required.", Alert.AlertType.WARNING); return false; }
 
         try {
             double deposit = Double.parseDouble(initialDepositField.getText());
-            if (deposit <= 0) {
-                showAlert("Invalid Amount", "Initial deposit must be greater than 0.", Alert.AlertType.WARNING);
-                return false;
-            }
+            if (deposit <= 0) { showAlert("Invalid Amount", "Initial deposit must be greater than 0.", Alert.AlertType.WARNING); return false; }
         } catch (NumberFormatException e) {
-            showAlert("Invalid Amount", "Please enter a valid number for initial deposit.", Alert.AlertType.WARNING);
-            return false;
+            showAlert("Invalid Amount", "Please enter a valid number for initial deposit.", Alert.AlertType.WARNING); return false;
         }
 
         return true;
@@ -255,7 +261,6 @@ public class AccountOpeningController {
             String tellerId = getCurrentTellerId();
             BigDecimal initialDeposit = new BigDecimal(initialDepositField.getText());
 
-            // Build address
             String address = addressLine1Field.getText() + ", " +
                     (addressLine2Field.getText().isEmpty() ? "" : addressLine2Field.getText() + ", ") +
                     cityField.getText() + ", " + stateField.getText() + " " + postalCodeField.getText();
@@ -275,15 +280,21 @@ public class AccountOpeningController {
             );
 
             if (accountNumber != null) {
+                // Generate username & password
+                String username = generateUsername(firstNameField.getText(), lastNameField.getText());
+                String password = generatePassword(8);
+
+                // Show account info + credentials
                 showAlert("Success",
                         "Account created successfully!\n\n" +
                                 "Account Number: " + accountNumber + "\n" +
                                 "Account Type: " + accountTypeComboBox.getValue() + "\n" +
-                                "Customer: " + firstNameField.getText() + " " + lastNameField.getText(),
+                                "Customer: " + firstNameField.getText() + " " + lastNameField.getText() + "\n\n" +
+                                "Login Credentials:\nUsername: " + username + "\nPassword: " + password,
                         Alert.AlertType.INFORMATION);
 
                 clearForm();
-                showStep(1); // Return to first step
+                showStep(1);
             } else {
                 showAlert("Error", "Failed to create account. Please try again.", Alert.AlertType.ERROR);
             }
@@ -296,10 +307,22 @@ public class AccountOpeningController {
 
     private String getCurrentTellerId() {
         Object currentUser = SessionManager.getCurrentUser();
-        if (currentUser instanceof Teller) {
-            return ((Teller) currentUser).getTellerId();
-        }
+        if (currentUser instanceof Teller) return ((Teller) currentUser).getTellerId();
         return "UNKNOWN";
+    }
+
+    private String generateUsername(String firstName, String lastName) {
+        return (firstName.charAt(0) + lastName).toLowerCase() + (int)(Math.random()*1000);
+    }
+
+    private String generatePassword(int length) {
+        String chars = "ABCDEFGHIJKLMNOPQRSTUVWXYZabcdefghijklmnopqrstuvwxyz0123456789@#$%";
+        StringBuilder sb = new StringBuilder();
+        Random rnd = new Random();
+        for (int i = 0; i < length; i++) {
+            sb.append(chars.charAt(rnd.nextInt(chars.length())));
+        }
+        return sb.toString();
     }
 
     @FXML
@@ -313,7 +336,6 @@ public class AccountOpeningController {
         alert.setTitle("Cancel Application");
         alert.setHeaderText("Are you sure you want to cancel this application?");
         alert.setContentText("All entered data will be lost.");
-
         alert.showAndWait().ifPresent(response -> {
             if (response == ButtonType.OK) {
                 clearForm();
@@ -347,26 +369,13 @@ public class AccountOpeningController {
     }
 
     private void clearForm() {
-        firstNameField.clear();
-        lastNameField.clear();
-        dateOfBirthPicker.setValue(null);
-        genderComboBox.setValue(null);
-        idNumberField.clear();
-        emailField.clear();
-        phoneField.clear();
-        addressLine1Field.clear();
-        addressLine2Field.clear();
-        cityField.clear();
-        stateField.clear();
-        postalCodeField.clear();
+        firstNameField.clear(); lastNameField.clear(); dateOfBirthPicker.setValue(null);
+        genderComboBox.setValue(null); idNumberField.clear(); emailField.clear(); phoneField.clear();
+        addressLine1Field.clear(); addressLine2Field.clear(); cityField.clear(); stateField.clear(); postalCodeField.clear();
         initialDepositField.clear();
 
-        // Reset account type but keep preselected if any
-        if (preselectedAccountType != null) {
-            accountTypeComboBox.setValue(preselectedAccountType);
-        } else {
-            accountTypeComboBox.setValue(null);
-        }
+        if (preselectedAccountType != null) accountTypeComboBox.setValue(preselectedAccountType);
+        else accountTypeComboBox.setValue(null);
     }
 
     private void showAlert(String title, String message, Alert.AlertType alertType) {

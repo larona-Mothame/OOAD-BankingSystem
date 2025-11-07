@@ -179,6 +179,30 @@ public class AccountService {
             default: return "SAVINGS";
         }
     }
+    public boolean isUniqueCustomer(String idNumber, String email, String phone) {
+        String sql = "SELECT COUNT(*) FROM customers WHERE national_id  = ? OR email = ? OR phone_number = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement ps = conn.prepareStatement(sql)) {
+
+            ps.setString(1, idNumber);
+            ps.setString(2, email);
+            ps.setString(3, phone);
+
+            try (ResultSet rs = ps.executeQuery()) {
+                if (rs.next()) {
+                    int count = rs.getInt(1);
+                    return count == 0; // true if no existing customer found
+                }
+            }
+
+        } catch (Exception e) {
+            e.printStackTrace();
+        }
+
+        return false; // if error occurs, assume not unique
+    }
+
 
     private String generateAccountNumber(String accountType) {
         String prefix;

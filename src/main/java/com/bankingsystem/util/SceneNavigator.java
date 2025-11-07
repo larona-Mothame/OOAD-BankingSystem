@@ -24,13 +24,12 @@ public class SceneNavigator {
 
         URL fxmlUrl = null;
 
-        // Try the normal path first
         fxmlUrl = SceneNavigator.class.getClassLoader().getResource(fxmlPath);
 
-        // If not found and we're looking in fxml/, try with leading space
+
         if (fxmlUrl == null && fxmlPath.startsWith("fxml/")) {
-            String filename = fxmlPath.substring(5); // Remove "fxml/"
-            String alternativePath = "fxml/ " + filename; // Add space after fxml/
+            String filename = fxmlPath.substring(5);
+            String alternativePath = "fxml/ " + filename;
             System.out.println("Trying alternative path with space: '" + alternativePath + "'");
             fxmlUrl = SceneNavigator.class.getClassLoader().getResource(alternativePath);
         }
@@ -74,14 +73,6 @@ public class SceneNavigator {
         switchScene("/fxml/AccountManagement.fxml", "Sediba Financial - Customer Dashboard");
     }
 
-    public static void toAccountManagement() throws IOException {
-        switchScene("/fxml/AccountManagement.fxml", "Sediba Financial - Account Management");
-    }
-
-    public static void toAccountLookup() throws IOException {
-        switchScene("/fxml/AccountLookup.fxml", "Sediba Financial - Account Lookup");
-    }
-
     public static void toOpenAccount() throws IOException {
         switchScene("/fxml/AccountOpening.fxml", "Sediba Financial - Open New Account");
     }
@@ -90,16 +81,4 @@ public class SceneNavigator {
         switchScene("/fxml/CustomerMangement.fxml", "Sediba Financial - Customer Management");
     }
 
-    public static void totransaction_history() throws IOException {
-        switchScene("/fxml/transaction_history_view.fxml", "Sediba Financial - Transaction History");
-    }
-
-    public static void toTransaction() throws IOException {
-        switchScene("/fxml/transaction_view.fxml", "Sediba Financial - Transaction");
-    }
-
-    public static void logout() throws IOException {
-        SessionManager.clearSession();
-        toLogin();
-    }
 }

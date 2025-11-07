@@ -11,7 +11,8 @@ public final class SessionManager {
     private static Map<String, Object> attributes = new HashMap<>();
 
     // Prevent instantiation
-    private SessionManager() {}
+    private SessionManager() {
+    }
 
     public static void setCurrentUser(Object user, String role) {
         if (user == null || role == null) {
@@ -30,13 +31,6 @@ public final class SessionManager {
         return currentUser;
     }
 
-    public static String getCurrentRole() {
-        return currentRole;
-    }
-
-    public static boolean isLoggedIn() {
-        return currentUser != null && currentRole != null;
-    }
 
     public static void clearSession() {
         currentUser = null;
@@ -61,11 +55,4 @@ public final class SessionManager {
         return attributes.get(key);
     }
 
-    public static void removeAttribute(String key) {
-        attributes.remove(key);
-    }
-
-    public static boolean hasAttribute(String key) {
-        return attributes.containsKey(key);
-    }
 }
