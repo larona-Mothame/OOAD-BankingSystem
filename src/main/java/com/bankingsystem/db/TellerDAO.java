@@ -66,7 +66,7 @@ public class TellerDAO {
                 rs.getString("first_name"),
                 rs.getString("last_name"),
                 rs.getString("username"),
-                rs.getString("password_hash"),  // Make sure this matches your DB column name!
+                rs.getString("password_hash"),
                 rs.getBoolean("is_active")
         );
 
