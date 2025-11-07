@@ -61,6 +61,7 @@ public class TellerDashboardController {
         selectAccount("Investment", investmentOption);
     }
 
+
     @FXML
     private void proceedAccountSelection() {
         if (selectedAccountType == null) {
@@ -71,11 +72,11 @@ public class TellerDashboardController {
 
         try {
             System.out.println("DEBUG: Proceeding with account type: " + selectedAccountType);
-            switch (selectedAccountType) {
-                case "Chequing" -> SceneNavigator.toOpenAccount();
-                case "Savings" -> SceneNavigator.toOpenAccount();
-                case "Investment" -> SceneNavigator.toOpenAccount();
-            }
+
+
+            SessionManager.setAttribute("selectedAccountType", selectedAccountType);
+
+            SceneNavigator.toOpenAccount();
         } catch (Exception e) {
             e.printStackTrace();
             showAlert(Alert.AlertType.ERROR, "Navigation Error", "Unable to open account creation: " + e.getMessage());
