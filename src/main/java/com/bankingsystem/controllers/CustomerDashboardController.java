@@ -492,9 +492,6 @@ public class CustomerDashboardController {
         }
     }
 
-    private void handleTransferTransaction(Account fromAccount, BigDecimal amount, String description) {
-        showAlert(AlertType.INFORMATION, "Transfer", "Transfer functionality to be implemented");
-    }
 
     private Account getSelectedAccount() {
         return currentlySelectedAccount;
