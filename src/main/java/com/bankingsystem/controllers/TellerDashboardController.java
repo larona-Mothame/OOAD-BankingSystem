@@ -6,10 +6,12 @@ import com.bankingsystem.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.Alert;
+import javafx.scene.control.Button;
 import javafx.scene.control.ButtonType;
 import javafx.scene.input.MouseEvent;
+import javafx.scene.layout.Pane;
 import javafx.scene.layout.VBox;
-import javafx.scene.control.Button;
+import javafx.scene.paint.Color;
 import javafx.scene.text.Text;
 
 public class TellerDashboardController {
@@ -26,13 +28,19 @@ public class TellerDashboardController {
     private void initialize() {
         // Display current teller's full name
         displayCurrentTeller();
+        // Disable proceed button initially
+        proceedButton.setDisable(true);
+
+        // Set initial text colors for options
+        resetOption(chequingOption);
+        resetOption(savingsOption);
+        resetOption(investmentOption);
     }
 
     private void displayCurrentTeller() {
         try {
             Object currentUser = SessionManager.getCurrentUser();
-            if (currentUser instanceof Teller) {
-                Teller teller = (Teller) currentUser;
+            if (currentUser instanceof Teller teller) {
                 usernameHeaderText.setText(teller.getFullName());
                 System.out.println("DEBUG: Teller dashboard loaded for: " + teller.getFullName() + " (" + teller.getUsername() + ")");
             } else {
@@ -61,21 +69,15 @@ public class TellerDashboardController {
         selectAccount("Investment", investmentOption);
     }
 
-
     @FXML
     private void proceedAccountSelection() {
         if (selectedAccountType == null) {
-            System.out.println("No account selected!");
             showAlert(Alert.AlertType.WARNING, "Selection Required", "Please select an account type to proceed.");
             return;
         }
 
         try {
-            System.out.println("DEBUG: Proceeding with account type: " + selectedAccountType);
-
-
             SessionManager.setAttribute("selectedAccountType", selectedAccountType);
-
             SceneNavigator.toOpenAccount();
         } catch (Exception e) {
             e.printStackTrace();
@@ -86,7 +88,6 @@ public class TellerDashboardController {
     @FXML
     private void manageCustomer() {
         try {
-            System.out.println("DEBUG: Navigating to customer management");
             SceneNavigator.toCustomerManagement();
         } catch (Exception e) {
             e.printStackTrace();
@@ -95,28 +96,43 @@ public class TellerDashboardController {
     }
 
     private void selectAccount(String type, VBox selectedBox) {
-        // Reset all option styles
-        chequingOption.setStyle(defaultStyle());
-        savingsOption.setStyle(defaultStyle());
-        investmentOption.setStyle(defaultStyle());
+        // Reset all options
+        resetOption(chequingOption);
+        resetOption(savingsOption);
+        resetOption(investmentOption);
 
-        // Highlight selected one
+        // Highlight selected option
         selectedBox.setStyle(selectedStyle());
-        selectedAccountType = type;
+        setTextColorRecursively(selectedBox, Color.BLACK);
 
-        // Enable proceed button
+        selectedAccountType = type;
         proceedButton.setDisable(false);
 
         System.out.println("DEBUG: Selected account type: " + type);
     }
 
+    private void resetOption(VBox box) {
+        box.setStyle(defaultStyle());
+        setTextColorRecursively(box, Color.web("#e0e0e0"));
+    }
+
+    private void setTextColorRecursively(Pane parent, Color color) {
+        for (var node : parent.getChildren()) {
+            if (node instanceof Text text) {
+                text.setFill(color);
+            } else if (node instanceof Pane pane) {
+                setTextColorRecursively(pane, color);
+            }
+        }
+    }
+
     private String defaultStyle() {
-        return "-fx-padding: 25 35; -fx-background-color: white; -fx-background-radius: 12;"
-                + "-fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,0,0,0.08), 8, 0, 0, 2);";
+        return "-fx-padding: 25 35; -fx-background-color: #2a2a2a; -fx-background-radius: 12;"
+                + "-fx-cursor: hand; -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 2);";
     }
 
     private String selectedStyle() {
-        return "-fx-padding: 25 35; -fx-background-color: #e8f5e9; -fx-background-radius: 12;"
+        return "-fx-padding: 25 35; -fx-background-color: #19df81; -fx-background-radius: 12;"
                 + "-fx-cursor: hand; -fx-effect: dropshadow(gaussian, rgba(0,128,0,0.4), 10, 0, 0, 2);";
     }
 
@@ -130,8 +146,8 @@ public class TellerDashboardController {
                 try {
                     Object currentUser = SessionManager.getCurrentUser();
                     String name = "Teller";
-                    if (currentUser instanceof Teller) {
-                        name = ((Teller) currentUser).getFullName();
+                    if (currentUser instanceof Teller teller) {
+                        name = teller.getFullName();
                     }
                     System.out.println("DEBUG: Logging out teller: " + name);
                     SessionManager.clearSession();
