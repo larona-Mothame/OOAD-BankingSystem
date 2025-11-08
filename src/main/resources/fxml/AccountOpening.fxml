@@ -13,7 +13,7 @@
 
     <!-- HEADER -->
     <top>
-        <VBox spacing="10" style="-fx-background-color: #222; -fx-padding: 15 30 10 30; -fx-effect: dropshadow(gaussian, #00000033, 10, 0, 0, 2);">
+        <VBox spacing="10" style="-fx-background-color: #222; -fx-padding: 15 30 10 30; -fx-effect: dropshadow(gaussian, #00000033, 8, 0, 0, 2);">
             <HBox alignment="CENTER_LEFT" spacing="20">
                 <Text text="Sediba Financial" style="-fx-fill: #e0e0e0; -fx-font-size: 18; -fx-font-weight: bold;" />
                 <Region HBox.hgrow="ALWAYS" />
@@ -22,7 +22,7 @@
                     <Text fx:id="currentUserText" text="Agent: [Username]" style="-fx-fill: #27ae60; -fx-font-size: 16; -fx-font-weight: bold;" />
                 </VBox>
                 <Button text="Back to Dashboard" onAction="#handleBackToDashboard"
-                        style="-fx-background-color: transparent; -fx-text-fill: #27ae60; -fx-border-color: #27ae60; -fx-border-radius: 5; -fx-padding: 5 15 5 15;" />
+                        style="-fx-background-color: transparent; -fx-text-fill: #27ae60; -fx-border-color: #27ae60; -fx-border-radius: 5; -fx-padding: 5 15;"/>
             </HBox>
         </VBox>
     </top>
@@ -34,7 +34,7 @@
 
                 <!-- Progress -->
                 <VBox alignment="CENTER" spacing="15"
-                      style="-fx-background-color: #2a2a2a; -fx-background-radius: 0; -fx-padding: 25; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
+                      style="-fx-background-color: #2a2a2a; -fx-background-radius: 12; -fx-padding: 25; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
                     <Text text="Account Opening Process"
                           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;" />
                     <HBox spacing="12" alignment="CENTER">
@@ -51,10 +51,10 @@
 
                 <!-- STEP 1 -->
                 <VBox fx:id="step1Personal" spacing="22"
-                      style="-fx-background-color: #2a2a2a; -fx-padding: 25; -fx-background-radius: 0; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
+                      style="-fx-background-color: #2a2a2a; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
                     <Text text="Personal Information"
                           style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
-                    <GridPane hgap="25" vgap="18" >
+                    <GridPane hgap="25" vgap="18">
                         <columnConstraints>
                             <ColumnConstraints percentWidth="50"/>
                             <ColumnConstraints percentWidth="50"/>
@@ -83,7 +83,7 @@
                     </GridPane>
                 </VBox>
 
-                <!-- Other steps (STEP 2, 3, 4) -->
+                <!-- STEP 2 -->
                 <VBox fx:id="step2Contact" spacing="22" visible="false"
                       style="-fx-background-color: #2a2a2a; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
                     <Text text="Contact Information" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
@@ -98,11 +98,84 @@
                         <Label text="Phone Number *" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-text-fill: #e0e0e0;"/>
                         <TextField fx:id="phoneField" GridPane.columnIndex="1" GridPane.rowIndex="1"
                                    style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
-                        <!-- Additional fields styled similarly -->
+                        <Label text="Address Line 1 *" GridPane.rowIndex="2" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="addressLine1Field" GridPane.rowIndex="3"
+                                   style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
+                        <Label text="Address Line 2" GridPane.columnIndex="1" GridPane.rowIndex="2" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="addressLine2Field" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                   style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
+                        <Label text="City *" GridPane.rowIndex="4" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="cityField" GridPane.rowIndex="5"
+                                   style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
+                        <Label text="State/Province *" GridPane.columnIndex="1" GridPane.rowIndex="4" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="stateField" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                                   style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
+                        <Label text="ZIP/Postal Code *" GridPane.rowIndex="6" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="postalCodeField" GridPane.rowIndex="7"
+                                   style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
                     </GridPane>
                 </VBox>
 
-                <!-- STEP 3 & 4 would be updated similarly -->
+                <!-- STEP 3 -->
+                <VBox fx:id="step3Account" spacing="22" visible="false"
+                      style="-fx-background-color: #2a2a2a; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
+                    <Text text="Account Information" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
+                    <GridPane hgap="25" vgap="18">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="50"/>
+                            <ColumnConstraints percentWidth="50"/>
+                        </columnConstraints>
+                        <Label text="Account Type *" GridPane.rowIndex="0" style="-fx-text-fill: #e0e0e0;"/>
+                        <VBox GridPane.rowIndex="1">
+                            <ComboBox fx:id="accountTypeComboBox"
+                                      style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
+                            <Label fx:id="selectedAccountTypeLabel" style="-fx-text-fill: #27ae60; -fx-font-size: 12;"/>
+                        </VBox>
+                        <Label text="Initial Deposit (BWP) *" GridPane.columnIndex="1" GridPane.rowIndex="0" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="initialDepositField" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   style="-fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6; -fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0;"/>
+                    </GridPane>
+                    <HBox spacing="25" alignment="CENTER_LEFT">
+                        <CheckBox fx:id="debitCardCheck" text="Debit Card" style="-fx-text-fill: #e0e0e0;"/>
+                        <CheckBox fx:id="onlineBankingCheck" text="Online Banking" style="-fx-text-fill: #e0e0e0;"/>
+                        <CheckBox fx:id="mobileBankingCheck" text="Mobile Banking" style="-fx-text-fill: #e0e0e0;"/>
+                        <CheckBox fx:id="overdraftProtectionCheck" text="Overdraft Protection" style="-fx-text-fill: #e0e0e0;"/>
+                    </HBox>
+                </VBox>
+
+                <!-- STEP 4 -->
+                <VBox fx:id="step4Review" spacing="22" visible="false"
+                      style="-fx-background-color: #2a2a2a; -fx-padding: 25; -fx-background-radius: 12; -fx-effect: dropshadow(gaussian, #00000033, 6, 0, 0, 2);">
+                    <Text text="Review &amp; Submit" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
+                    <GridPane hgap="25" vgap="12">
+                        <columnConstraints>
+                            <ColumnConstraints percentWidth="35"/>
+                            <ColumnConstraints percentWidth="65"/>
+                        </columnConstraints>
+                        <Label text="First Name:" GridPane.rowIndex="0" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewFirstName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="0"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                        <Label text="Last Name:" GridPane.rowIndex="1" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewLastName" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="1"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                        <Label text="ID Number:" GridPane.rowIndex="2" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewIdNumber" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="2"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                        <Label text="Email:" GridPane.rowIndex="3" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewEmail" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="3"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                        <Label text="Phone:" GridPane.rowIndex="4" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewPhone" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="4"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                        <Label text="Account Type:" GridPane.rowIndex="5" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewAccountType" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="5"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                        <Label text="Initial Deposit (BWP):" GridPane.rowIndex="6" style="-fx-text-fill: #e0e0e0;"/>
+                        <TextField fx:id="reviewInitialDeposit" editable="false" GridPane.columnIndex="1" GridPane.rowIndex="6"
+                                   style="-fx-background-color: #1f1f1f; -fx-text-fill: #e0e0e0; -fx-background-radius: 6; -fx-border-color: #444; -fx-border-radius: 6;"/>
+                    </GridPane>
+                </VBox>
+
             </VBox>
         </ScrollPane>
     </center>
