@@ -40,10 +40,10 @@
                         <Text text="Account Overview" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: #e0e0e0;" />
                         <Region HBox.hgrow="ALWAYS"/>
                         <Label fx:id="totalBalanceLabel" text="Total: 0.00"
-                               style="-fx-padding: 8 15; -fx-background-radius: 8; -fx-font-weight: bold; -fx-background-color: #27ae60; -fx-text-fill: white;" />
+                               style="-fx-padding: 8 15; -fx-background-radius: 8; -fx-font-weight: bold; -fx-background-color: rgba(37,37,37,0.5); -fx-text-fill: white;" />
                     </HBox>
                     <HBox spacing="15" alignment="CENTER">
-                        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #27ae60; -fx-padding: 12; -fx-background-radius: 8; -fx-min-width: 100; -fx-border-color: #1a1a1a; -fx-border-width: 1; -fx-border-radius: 8;">
+                        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: rgb(51,51,51); -fx-padding: 12; -fx-background-radius: 8; -fx-min-width: 100; -fx-border-color: #1a1a1a; -fx-border-width: 1; -fx-border-radius: 8;">
                             <Text text="Accounts" style="-fx-font-size: 14; -fx-fill: rgba(255,255,255,0.8);"/>
                             <Text fx:id="totalAccountsText" text="0" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: white;"/>
                         </VBox>
@@ -51,7 +51,7 @@
                             <Text text="This Month" style="-fx-font-size: 14; -fx-fill: rgba(224,224,224,0.7);"/>
                             <Text fx:id="monthlySpendingText" text="BWP 0.00" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
                         </VBox>
-                        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #27ae60; -fx-padding: 12; -fx-background-radius: 8; -fx-min-width: 100; -fx-border-color: #1a1a1a; -fx-border-width: 1; -fx-border-radius: 8;">
+                        <VBox alignment="CENTER" spacing="5" style="-fx-background-color: #333333; -fx-padding: 12; -fx-background-radius: 8; -fx-min-width: 100; -fx-border-color: #1a1a1a; -fx-border-width: 1; -fx-border-radius: 8;">
                             <Text text="Recent" style="-fx-font-size: 14; -fx-fill: rgba(224,224,224,0.7);"/>
                             <Text fx:id="lastTransactionText" text="No transactions" style="-fx-font-size: 14; -fx-font-weight: bold; -fx-fill: #e0e0e0; -fx-wrap-text: true;"/>
                         </VBox>
@@ -63,7 +63,7 @@
                     <Text text="Your Accounts" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
                     <ScrollPane fitToWidth="true" style="-fx-background-color: transparent; -fx-max-height: 350;">
                         <VBox fx:id="accountsContainer" spacing="10">
-                            <Label text="Loading your accounts..." style="-fx-text-fill: rgba(224,224,224,0.8); -fx-font-size: 14; -fx-alignment: center; -fx-padding: 20;"/>
+                            <Label text="Loading your accounts..." style="-fx-text-fill: rgb(51,51,51); -fx-font-size: 14; -fx-alignment: center; -fx-padding: 20;"/>
                         </VBox>
                     </ScrollPane>
                 </VBox>
@@ -78,7 +78,7 @@
                         <Text fx:id="transactionTitle" text="Transaction" style="-fx-font-size: 24; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
                         <Region HBox.hgrow="ALWAYS"/>
                         <Button text="Close" onAction="#handleCloseTransaction"
-                                style="-fx-background-color: transparent; -fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-border-color: #27ae60; -fx-border-radius: 8; -fx-padding: 5 10;"/>
+                                style="-fx-background-color: rgba(255,0,0,0.7); -fx-text-fill: #ffffff; -fx-font-weight: bold; -fx-padding: 5 10;"/>
                     </HBox>
 
                     <VBox spacing="10" style="-fx-padding: 10; -fx-background-color: #333; -fx-background-radius: 8;">
@@ -96,12 +96,12 @@
                         <VBox spacing="5">
                             <Label text="Amount *" style="-fx-font-size: 14; -fx-text-fill: #e0e0e0; -fx-font-weight: bold;"/>
                             <TextField fx:id="amountField" promptText="0.00" prefWidth="250" prefHeight="35"
-                                       style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                                       style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #333333; -fx-text-fill: white;"/>
                         </VBox>
                         <VBox spacing="5">
                             <Label text="Description" style="-fx-font-size: 14; -fx-text-fill: #e0e0e0; -fx-font-weight: bold;"/>
                             <TextField fx:id="descriptionField" promptText="Enter description" prefWidth="250" prefHeight="35"
-                                       style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #27ae60; -fx-text-fill: white;"/>
+                                       style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #333333; -fx-text-fill: white;"/>
                         </VBox>
                         <VBox fx:id="transferSection" spacing="5" visible="false">
                             <Label text="To Account *" style="-fx-font-size: 14; -fx-text-fill: #e0e0e0; -fx-font-weight: bold;"/>
@@ -110,11 +110,11 @@
                         </VBox>
                         <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
                             <Button text="Cancel" onAction="#handleCancelTransaction" prefWidth="100" prefHeight="35"
-                                    style="-fx-background-color: #555; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                                    style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 2;"/>
                             <Button fx:id="depositButton" text="Deposit" onAction="#handleDeposit" prefWidth="100" prefHeight="35"
-                                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 2;"/>
                             <Button fx:id="withdrawButton" text="Withdraw" onAction="#handleWithdraw" prefWidth="100" prefHeight="35"
-                                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 8;"/>
+                                    style="-fx-background-color: #27ae60; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 2;"/>
                         </HBox>
                     </VBox>
                 </VBox>
@@ -127,12 +127,11 @@
                     <VBox spacing="8" style="-fx-padding: 15 0 0 0;">
                         <HBox spacing="8"><Text text="●" style="-fx-fill: #27ae60;"/><Text text="Click Deposit to add funds" style="-fx-fill: rgba(224,224,224,0.7);"/></HBox>
                         <HBox spacing="8"><Text text="●" style="-fx-fill: #27ae60;"/><Text text="Click Withdraw to take out money" style="-fx-fill: rgba(224,224,224,0.7);"/></HBox>
-                        <HBox spacing="8"><Text text="●" style="-fx-fill: #27ae60;"/><Text text="Click Transactions to view history" style="-fx-fill: rgba(224,224,224,0.7);"/></HBox>
-                    </VBox>
+                                            </VBox>
                 </VBox>
 
                 <!-- Recent Transactions Table -->
-                <VBox spacing="10" style="-fx-background-color: #2a2a2a; -fx-padding: 20; -fx-background-radius: 12; -fx-border-color: #333; -fx-border-width: 1.5; -fx-border-radius: 8;" prefHeight="300">
+                <VBox spacing="10" style="-fx-background-color: #2a2a2a; -fx-padding: 10; -fx-background-radius: 12; -fx-border-color: #333; -fx-border-width: 1.5; -fx-border-radius: 8;" prefHeight="300">
                     <HBox alignment="CENTER_LEFT" spacing="10">
                         <Text text="Recent Transactions" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
                         <Region HBox.hgrow="ALWAYS"/>
@@ -142,7 +141,7 @@
                                 style="-fx-background-color: transparent; -fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-border-color: #27ae60; -fx-border-radius: 8;"/>
                     </HBox>
 
-                    <TableView fx:id="transactionsTable" prefHeight="200" style="-fx-background-color: transparent;">
+                    <TableView fx:id="transactionsTable" prefHeight="200" style="-fx-background-color:#333333;">
                         <columns>
                             <TableColumn fx:id="dateColumn" text="Date" prefWidth="120"/>
                             <TableColumn fx:id="typeColumn" text="Type" prefWidth="100"/>

@@ -17,7 +17,7 @@ import java.util.Random;
 
 public class AccountOpeningController {
 
-    @FXML private Text currentUserText;
+
     @FXML private Text progressText;
 
     @FXML private Label stepLabel1;
@@ -92,11 +92,7 @@ public class AccountOpeningController {
             selectedAccountTypeLabel.setText("Selected: " + preselectedAccountType);
         }
 
-        Object currentUser = SessionManager.getCurrentUser();
-        if (currentUser instanceof Teller) {
-            Teller teller = (Teller) currentUser;
-            currentUserText.setText("Agent: " + teller.getFullName());
-        }
+
     }
 
     private void setupStepNavigation() {

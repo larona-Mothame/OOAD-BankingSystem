@@ -4,16 +4,13 @@
 <?import javafx.scene.image.*?>
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
-<?import javafx.geometry.Insets?>
 
-<BorderPane xmlns="http://javafx.com/javafx/11.0.1"
-            xmlns:fx="http://javafx.com/fxml/1"
-            fx:controller="com.bankingsystem.controllers.LoginController"
-            prefWidth="500" prefHeight="600"
-            style="-fx-background-color: rgb(28,59,44);">
+<BorderPane prefHeight="800" prefWidth="500" style="-fx-background-color: rgb(28,59,44);"
+            xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
+            fx:controller="com.bankingsystem.controllers.LoginController">
 
     <center>
-        <VBox alignment="CENTER" spacing="50" style="-fx-padding: 60 0 40 0;">
+        <VBox alignment="CENTER" prefHeight="800.0" prefWidth="568.0" spacing="50" style="-fx-padding: 60 0 40 0;">
 
             <!-- Header with Logo -->
             <VBox alignment="CENTER" spacing="15">
@@ -23,8 +20,7 @@
                     </image>
                 </ImageView>
 
-                <Text text="Sediba Financial"
-                      style="-fx-fill: white; -fx-font-size: 36; -fx-font-weight: bold;" />
+                <Text style="-fx-fill: white; -fx-font-size: 36; -fx-font-weight: bold;" text="Sediba Financial" />
             </VBox>
 
             <!-- Form Section -->
@@ -32,48 +28,29 @@
 
                 <!-- Username Row -->
                 <HBox alignment="CENTER" spacing="10">
-                    <Label text="Username"
-                           style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13;" />
-                    <TextField fx:id="usernameField" promptText="Enter your username"
-                               prefWidth="430" prefHeight="50"
-                               style="-fx-background-radius: 8; -fx-border-color: rgb(34,255,0);
-                                      -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14;
-                                      -fx-padding: 0 8; -fx-background-color: rgb(30,30,30);" />
+                    <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13;" text="Username" />
+                    <TextField fx:id="usernameField" prefHeight="50" prefWidth="430" promptText="Enter your username" style="-fx-background-radius: 8; -fx-border-color: rgb(34,255,0);                                       -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14;                                       -fx-padding: 0 8; -fx-background-color: rgb(30,30,30);" />
                 </HBox>
 
                 <!-- Password Row -->
                 <HBox alignment="CENTER" spacing="10">
-                    <Label text="Password"
-                           style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13;" />
-                    <PasswordField fx:id="passwordField" promptText="Enter your password"
-                                   prefWidth="430" prefHeight="50"
-                                   style="-fx-background-radius: 8; -fx-border-color: rgb(34,255,0);
-                                          -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14;
-                                          -fx-padding: 0 8; -fx-background-color: rgb(30,30,30);" />
+                    <Label style="-fx-text-fill: white; -fx-font-weight: bold; -fx-font-size: 13;" text="Password" />
+                    <PasswordField fx:id="passwordField" prefHeight="50" prefWidth="430" promptText="Enter your password" style="-fx-background-radius: 8; -fx-border-color: rgb(34,255,0);                                           -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14;                                           -fx-padding: 0 8; -fx-background-color: rgb(30,30,30);" />
                 </HBox>
 
                 <!-- Login Button + Error -->
                 <VBox alignment="CENTER" spacing="10">
-                    <Button fx:id="loginButton" text="Login"
-                            onAction="#handleLogin" prefWidth="120" prefHeight="30"
-                            style="-fx-background-color: #19df81; -fx-text-fill: white; -fx-font-weight: bold;
-                                   -fx-font-size: 14; -fx-background-radius: 8; -fx-cursor: hand;" />
+                    <Button fx:id="loginButton" onAction="#handleLogin" prefHeight="30" prefWidth="120" style="-fx-background-color: #19df81; -fx-text-fill: white; -fx-font-weight: bold;                                    -fx-font-size: 14; -fx-background-radius: 8; -fx-cursor: hand;" text="Login" />
 
-                    <Label fx:id="errorLabel"
-                           style="-fx-text-fill: #f39c12; -fx-font-size: 12; -fx-alignment: center;
-                                  -fx-wrap-text: true; -fx-background-color: rgba(255,255,255,0.1);
-                                  -fx-background-radius: 4; -fx-padding: 8;"
-                           visible="false" text="Error message will appear here" />
+                    <Label fx:id="errorLabel" style="-fx-text-fill: #f39c12; -fx-font-size: 12; -fx-alignment: center;                                   -fx-wrap-text: true; -fx-background-color: rgba(255,255,255,0.1);                                   -fx-background-radius: 4; -fx-padding: 8;" text="Error message will appear here" visible="false" />
                 </VBox>
 
             </VBox>
 
             <!-- Footer -->
             <VBox alignment="CENTER" spacing="20">
-                <Text text="© 2025 Sediba Financial. All rights reserved."
-                      style="-fx-fill: rgba(255,255,255,0.6); -fx-font-size: 12;" />
-                <Hyperlink text="Terms and Conditions apply"
-                           style="-fx-text-fill: rgba(255,255,255,0.8); -fx-border-color: transparent; -fx-font-size: 12;" />
+                <Text style="-fx-fill: rgba(255,255,255,0.6); -fx-font-size: 12;" text="© 2025 Sediba Financial. All rights reserved." />
+                <Hyperlink style="-fx-text-fill: rgba(255,255,255,0.8); -fx-border-color: transparent; -fx-font-size: 12;" text="Terms and Conditions apply" />
             </VBox>
         </VBox>
     </center>
