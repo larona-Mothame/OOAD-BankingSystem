@@ -10,7 +10,7 @@
 <BorderPane xmlns="http://javafx.com/javafx/11.0.1"
             xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.bankingsystem.controllers.AccountOpeningController"
-            prefWidth="1000" prefHeight="800"
+            prefWidth="1080" prefHeight="1920"
             style="-fx-background-color: rgb(28,124,66);">
 
     <!-- HEADER -->
@@ -28,7 +28,11 @@
                     <Text fx:id="progressText" text="Step 1: Personal Information" style="-fx-fill: #aaa; -fx-font-size: 14;  " />
 
                 </VBox>
-                <Button onAction="#handleBackToDashboard"
+                <Button text="Back to Dashboard" onAction="#handleBackToDashboard"
+                        style="-fx-background-color: rgba(251,251,251,0.1); -fx-text-fill: white;
+                    -fx-font-weight: bold; -fx-font-size: 13; -fx-background-radius: 2;">
+                </Button>
+                <Button onAction="#handleLogout"
                         text="Logout"
                         contentDisplay="RIGHT"
                         style="-fx-background-color: transparent; -fx-text-fill: white; -fx-font-weight: bold; -fx-cursor: hand;"

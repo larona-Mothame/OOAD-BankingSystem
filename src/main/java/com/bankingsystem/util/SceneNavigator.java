@@ -58,6 +58,8 @@ public class SceneNavigator {
         primaryStage.setTitle(title);
         primaryStage.centerOnScreen();
         primaryStage.show();
+        primaryStage.setFullScreen(true);
+
     }
 
     // Navigation routes

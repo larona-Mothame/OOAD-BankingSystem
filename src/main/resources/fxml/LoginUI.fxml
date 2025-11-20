@@ -5,7 +5,7 @@
 <?import javafx.scene.layout.*?>
 <?import javafx.scene.text.*?>
 
-<BorderPane prefHeight="800" prefWidth="500" style="-fx-background-color: rgb(28,59,44);"
+<BorderPane prefHeight="1080" prefWidth="1920" style="-fx-background-color: rgb(28,59,44);"
             xmlns="http://javafx.com/javafx/17.0.12" xmlns:fx="http://javafx.com/fxml/1"
             fx:controller="com.bankingsystem.controllers.LoginController">
 

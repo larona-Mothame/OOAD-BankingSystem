@@ -315,8 +315,6 @@ public class CustomerDashboardController {
             depositButton.setManaged(true);
             withdrawButton.setVisible(false);
             withdrawButton.setManaged(false);
-            showAlert(AlertType.INFORMATION, "Savings Account",
-                    "Withdrawals from savings accounts are not allowed. You can only deposit funds.");
         } else if (account instanceof InvestmentAccount) {
             transactionTitle.setText("Investment Account");
             depositButton.setVisible(true);
@@ -537,22 +535,21 @@ public class CustomerDashboardController {
         loadCustomerData();
     }
 
-    @FXML
-    private void handleLogout(ActionEvent event) {
-        Alert confirmation = new Alert(AlertType.CONFIRMATION);
-        confirmation.setTitle("Logout");
-        confirmation.setHeaderText("Are you sure you want to logout?");
-        confirmation.showAndWait().ifPresent(response -> {
-            if (response == ButtonType.OK) {
-                try {
-                    SceneNavigator.toLogin();
-                } catch (Exception e) {
-                    e.printStackTrace();
-                    showAlert(AlertType.ERROR, "Navigation Error", "Unable to logout: " + e.getMessage());
-                }
-            }
-        });
+
+
+    @FXML private void handleLogout() {
+        try { SceneNavigator.toLogin(); }
+        catch (Exception e) { showAlert("Logout Error", e.getMessage(), Alert.AlertType.ERROR); }
     }
+
+    private void showAlert(String title, String message, Alert.AlertType alertType) {
+        Alert alert = new Alert(alertType);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 
     @FXML
     private void handleTermsAndConditions() {

@@ -7,6 +7,7 @@ import com.bankingsystem.model.AccountWithCustomer;
 import javafx.beans.property.*;
 import javafx.collections.FXCollections;
 import javafx.collections.ObservableList;
+import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.fxml.Initializable;
 import javafx.scene.control.*;
@@ -221,9 +222,14 @@ public class CustomerProfileController implements Initializable {
         }
     }
 
-    @FXML private void handleBackToDashboard() {
-        try { SceneNavigator.toTellerDashboard(); }
-        catch (Exception e) { showAlert("Navigation Error", e.getMessage(), Alert.AlertType.ERROR); }
+    @FXML
+    private void handleBackToDashboard(ActionEvent event) {
+        try {
+            SceneNavigator.toTellerDashboard();
+        } catch (Exception e) {
+            e.printStackTrace();
+            showAlert("Navigation Error", "Failed to navigate to dashboard: " + e.getMessage(), Alert.AlertType.ERROR);
+        }
     }
 
     @FXML private void handleTermsAndConditions() { showTermsAndConditions(); }

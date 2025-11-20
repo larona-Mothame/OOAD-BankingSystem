@@ -17,7 +17,6 @@ import java.util.Random;
 
 public class AccountOpeningController {
 
-
     @FXML private Text progressText;
 
     @FXML private Label stepLabel1;
@@ -321,10 +320,6 @@ public class AccountOpeningController {
         return sb.toString();
     }
 
-    @FXML
-    private void handleSaveDraft(ActionEvent event) {
-        showAlert("Draft Saved", "The account application has been saved as a draft.", Alert.AlertType.INFORMATION);
-    }
 
     @FXML
     private void handleCancel(ActionEvent event) {
@@ -362,6 +357,11 @@ public class AccountOpeningController {
         showAlert("Privacy Policy",
                 "Your data will be stored securely and used only for banking operations.",
                 Alert.AlertType.INFORMATION);
+    }
+
+    @FXML private void handleLogout() {
+        try { SceneNavigator.toLogin(); }
+        catch (Exception e) { showAlert("Logout Error", e.getMessage(), Alert.AlertType.ERROR); }
     }
 
     private void clearForm() {
