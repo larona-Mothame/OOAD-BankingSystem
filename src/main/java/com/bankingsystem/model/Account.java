@@ -32,10 +32,6 @@ public abstract class Account {
         this.status = Status.ACTIVE;
     }
 
-    /**
-     * Generate an account number. For readability it uses a prefix branchCode-UUID short.
-     * Controllers or DB may override later if a different scheme is required.
-     */
     protected static String generateAccountNumber(String branchCode) {
         String uuidShort = UUID.randomUUID().toString().substring(0, 8).toUpperCase();
         if (branchCode == null || branchCode.trim().isEmpty()) {
@@ -48,33 +44,11 @@ public abstract class Account {
         return accountNumber;
     }
 
-    public String getOwnerCustomerId() {
-        return ownerCustomerId;
-    }
 
     public BigDecimal getBalance() {
         return balance;
     }
 
-    public String getBranchCode() {
-        return branchCode;
-    }
-
-    public LocalDateTime getDateOpened() {
-        return dateOpened;
-    }
-
-    public Status getStatus() {
-        return status;
-    }
-
-    /**
-     * Deposit money into account. Positive amounts required.
-     *
-     * @param amount amount to deposit (must be > 0)
-     * @throws IllegalArgumentException if amount <= 0
-     * @throws IllegalStateException if account is not active
-     */
     public synchronized void deposit(BigDecimal amount) {
         checkActive();
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -83,13 +57,6 @@ public abstract class Account {
         balance = balance.add(amount);
     }
 
-    /**
-     * Withdraw money from account. Subclasses implement withdrawal rules and call this to perform actual debit.
-     *
-     * @param amount amount to withdraw
-     * @throws IllegalArgumentException if amount <= 0
-     * @throws IllegalStateException    if account is not active
-     */
     protected synchronized void debit(BigDecimal amount) {
         checkActive();
         if (amount == null || amount.compareTo(BigDecimal.ZERO) <= 0) {
@@ -101,25 +68,8 @@ public abstract class Account {
         balance = balance.subtract(amount);
     }
 
-    /**
-     * Default withdraw method - subclasses override to enforce specific rules.
-     *
-     * @param amount amount to withdraw
-     */
     public abstract void withdraw(BigDecimal amount);
 
-    /**
-     * Close the account. Default behavior: only allow if balance is zero.
-     *
-     * Subclasses may override if special conditions apply (e.g., disallow closing if min balance).
-     */
-    public synchronized void closeAccount() {
-        if (status == Status.CLOSED) return;
-        if (balance.compareTo(BigDecimal.ZERO) != 0) {
-            throw new IllegalStateException("Account balance must be zero to close account");
-        }
-        status = Status.CLOSED;
-    }
 
     protected void checkActive() {
         if (status != Status.ACTIVE) {

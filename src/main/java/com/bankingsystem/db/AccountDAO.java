@@ -108,7 +108,7 @@ public class AccountDAO {
         }
         return false;
     }
-    // Add this method to your AccountDAO class
+
     public List<AccountWithCustomer> findAllAccountsWithCustomerInfo() {
         List<AccountWithCustomer> accounts = new ArrayList<>();
         String sql = "SELECT a.*, c.first_name, c.last_name, c.national_id, c.phone_number, c.email " +

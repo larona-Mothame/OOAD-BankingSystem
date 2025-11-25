@@ -12,6 +12,10 @@
             prefWidth="1200" prefHeight="800"
             style="-fx-background-color:  #1c7c42;">
 
+
+
+
+
     <!-- TOP HEADER -->
     <top>
         <HBox alignment="CENTER" spacing="10" style="-fx-padding: 15 30; -fx-background-color: #1c3b2c; -fx-border-color: transparent transparent #22ff00 transparent; -fx-border-width: 0 0 2 0;">
@@ -121,18 +125,14 @@
                         <VBox spacing="5">
                             <Label text="Amount *" style="-fx-font-size: 14; -fx-text-fill: #e0e0e0; -fx-font-weight: bold;"/>
                             <TextField fx:id="amountField" promptText="0.00" prefWidth="250" prefHeight="35"
-                                       style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #333333; -fx-text-fill: white;"/>
+                                       style="-fx-background-radius: 2; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #333333; -fx-text-fill: white;"/>
                         </VBox>
                         <VBox spacing="5">
                             <Label text="Description" style="-fx-font-size: 14; -fx-text-fill: #e0e0e0; -fx-font-weight: bold;"/>
                             <TextField fx:id="descriptionField" promptText="Enter description" prefWidth="250" prefHeight="35"
-                                       style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #333333; -fx-text-fill: white;"/>
+                                       style="-fx-background-radius: 2; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-padding: 0 8; -fx-background-color: #333333; -fx-text-fill: white;"/>
                         </VBox>
-                        <VBox fx:id="transferSection" spacing="5" visible="false">
-                            <Label text="To Account *" style="-fx-font-size: 14; -fx-text-fill: #e0e0e0; -fx-font-weight: bold;"/>
-                            <ComboBox fx:id="transferAccountComboBox" promptText="Select account" prefWidth="250" prefHeight="35"
-                                      style="-fx-background-radius: 8; -fx-border-color: #333; -fx-border-radius: 8; -fx-border-width: 1.5; -fx-font-size: 14; -fx-background-color: #27ae60;"/>
-                        </VBox>
+
                         <HBox spacing="10" style="-fx-padding: 10 0 0 0;">
                             <Button text="Cancel" onAction="#handleCancelTransaction" prefWidth="100" prefHeight="35"
                                     style="-fx-background-color: #ff0000; -fx-text-fill: white; -fx-font-weight: bold; -fx-background-radius: 2;"/>
@@ -161,9 +161,8 @@
                         <Text text="Transactions" style="-fx-font-size: 20; -fx-font-weight: bold; -fx-fill: #e0e0e0;"/>
                         <Region HBox.hgrow="ALWAYS"/>
                         <ComboBox fx:id="transactionFilterComboBox" promptText="Filter" prefWidth="150" prefHeight="35"
-                                  style="-fx-background-radius: 2;  -fx-border-radius: 2; -fx-border-width: 1.5; -fx-font-size: 14; -fx-background-color: #27ae60;"/>
-                        <Button text="View All" onAction="#handleViewAllTransactions" prefWidth="80" prefHeight="35"
-                                style="-fx-background-color: transparent; -fx-text-fill: #27ae60; -fx-font-weight: bold; -fx-border-color: #27ae60; -fx-border-radius: 2;"/>
+                                  style="-fx-background-radius: 2;  -fx-border-radius: 2; -fx-border-width: 1.5; -fx-font-size: 14; -fx-background-color: #27ae60;"
+                                  onAction="#handleFilterTransactions"/>
                     </HBox>
 
                     <TableView fx:id="transactionsTable" prefHeight="200" style="-fx-background-color:#333333;">

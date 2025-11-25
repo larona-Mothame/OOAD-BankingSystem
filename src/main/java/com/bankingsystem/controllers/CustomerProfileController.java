@@ -1,5 +1,6 @@
 package com.bankingsystem.controllers;
-
+import com.bankingsystem.model.Account;
+import com.bankingsystem.model.ApplyInterest;
 import com.bankingsystem.util.SceneNavigator;
 import com.bankingsystem.db.AccountDAO;
 import com.bankingsystem.db.CustomerDAO;
@@ -13,7 +14,7 @@ import javafx.fxml.Initializable;
 import javafx.scene.control.*;
 import javafx.scene.layout.VBox;
 import javafx.scene.text.Text;
-
+import java.math.BigDecimal;
 import java.net.URL;
 import java.util.HashMap;
 import java.util.List;
@@ -373,4 +374,62 @@ public class CustomerProfileController implements Initializable {
         public String getContactInfo() { return contactInfo.get(); }
         public void setContactInfo(String value) { contactInfo.set(value); }
     }
+
+    @FXML
+    private void handleApplyInterest() {
+        // Fetch all accounts that implement ApplyInterest
+        List<Account> accounts = accountDAO.findAllAccountsWithCustomerInfo()
+                .stream()
+                .map(a -> accountDAO.findAccountByNumber(a.getAccountNumber()))
+                .filter(a -> a instanceof ApplyInterest)
+                .toList();
+
+        if (accounts.isEmpty()) {
+            showAlert(Alert.AlertType.INFORMATION, "No Accounts", "No accounts eligible for interest.");
+            return;
+        }
+
+        // Apply interest and update DB
+        for (Account account : accounts) {
+            ApplyInterest interestAccount = (ApplyInterest) account;
+            interestAccount.applyInterest();
+            accountDAO.updateAccountBalance(account.getAccountNumber(), account.getBalance());
+        }
+
+        showAlert(Alert.AlertType.INFORMATION, "Interest Applied", "Interest applied to all accounts.");
+
+        // Refresh table properly
+        refreshAccountsTable();
+    }
+
+    private void refreshAccountsTable() {
+        List<AccountWithCustomer> allAccounts = accountDAO.findAllAccountsWithCustomerInfo();
+
+        // First, count accounts per customer
+        Map<String, Integer> customerAccountCount = new HashMap<>();
+        for (AccountWithCustomer acc : allAccounts) {
+            customerAccountCount.put(acc.getNationalId(),
+                    customerAccountCount.getOrDefault(acc.getNationalId(), 0) + 1);
+        }
+
+        // Convert to CustomerAccount objects
+        ObservableList<CustomerAccount> refreshedData = FXCollections.observableArrayList();
+        for (AccountWithCustomer acc : allAccounts) {
+            refreshedData.add(convertToCustomerAccount(acc, customerAccountCount));
+        }
+
+        filteredData.setAll(refreshedData);
+        accountsTable.setItems(filteredData);
+        updateTotalAccountsLabel(filteredData.size());
+    }
+
+
+    private void showAlert(Alert.AlertType type, String title, String message) {
+        Alert alert = new Alert(type);
+        alert.setTitle(title);
+        alert.setHeaderText(null);
+        alert.setContentText(message);
+        alert.showAndWait();
+    }
+
 }

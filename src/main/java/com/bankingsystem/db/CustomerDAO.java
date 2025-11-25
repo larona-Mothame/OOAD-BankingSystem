@@ -82,15 +82,6 @@ public class CustomerDAO {
         return PasswordUtil.verifyPassword(inputPassword, storedHash);
     }
 
-    /**
-     * Updates an existing customer's first name, last name, and contact info.
-     *
-     * @param nationalId   The customer's national ID (unique)
-     * @param firstName    New first name
-     * @param lastName     New last name
-     * @param contactInfo  New contact info (phone/email)
-     * @return true if the update succeeded, false otherwise
-     */
     public boolean updateCustomer(String nationalId, String firstName, String lastName, String contactInfo) {
         String sql = "UPDATE customers SET first_name = ?, last_name = ?, phone_number = ?, email = ? WHERE national_id = ?";
 

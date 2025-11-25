@@ -8,6 +8,8 @@ import com.bankingsystem.util.SessionManager;
 import javafx.event.ActionEvent;
 import javafx.fxml.FXML;
 import javafx.scene.control.*;
+import javafx.scene.image.Image;
+import javafx.scene.image.ImageView;
 import javafx.scene.text.Text;
 
 import java.io.IOException;
@@ -17,11 +19,14 @@ import java.io.IOException;
  */
 public class LoginController {
 
-    @FXML
-    private TextField usernameField;
+    @FXML private PasswordField passwordField;
+    @FXML private TextField passwordVisible;
+    @FXML private Button togglePasswordBtn;
+    @FXML private ImageView eyeIcon;
+
 
     @FXML
-    private PasswordField passwordField;
+    private TextField usernameField;
 
     @FXML
     private Button loginButton;
@@ -38,7 +43,10 @@ public class LoginController {
     private void initialize() {
         errorLabel.setVisible(false);
         setupEnterKeySupport();
+        setupEyeToggle();
     }
+
+
 
     /**
      * Allow login by pressing Enter key
@@ -162,6 +170,45 @@ public class LoginController {
             }
         }).start();
     }
+
+
+    private boolean passwordVisibleFlag = false;
+
+    private void setupEyeToggle() {
+        // Keep passwordField and passwordVisible in sync
+        passwordVisible.textProperty().bindBidirectional(passwordField.textProperty());
+
+        // Load eye icons
+        Image openEye = new Image(getClass().getResourceAsStream("/images/eye-open.png"));
+        Image closedEye = new Image(getClass().getResourceAsStream("/images/eye-closed.png"));
+
+        // Set initial icon
+        eyeIcon.setImage(closedEye);
+
+        togglePasswordBtn.setOnAction(e -> {
+            passwordVisibleFlag = !passwordVisibleFlag;
+
+            if (passwordVisibleFlag) {
+                passwordVisible.setVisible(true);
+                passwordVisible.setManaged(true);
+
+                passwordField.setVisible(false);
+                passwordField.setManaged(false);
+
+                eyeIcon.setImage(openEye);
+            } else {
+                passwordVisible.setVisible(false);
+                passwordVisible.setManaged(false);
+
+                passwordField.setVisible(true);
+                passwordField.setManaged(true);
+
+                eyeIcon.setImage(closedEye);
+            }
+        });
+    }
+
+
 
 
 }

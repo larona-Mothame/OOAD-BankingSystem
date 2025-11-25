@@ -24,6 +24,13 @@ import java.util.List;
 
 public class CustomerDashboardController {
 
+    @FXML private VBox interestOverlay;
+    @FXML private Label interestOverlayMessage;
+    @FXML private ProgressIndicator interestProgress;
+
+
+
+
     // --- Header ---
     @FXML private Text customerNameText;
     @FXML private Label totalBalanceLabel;
@@ -44,8 +51,7 @@ public class CustomerDashboardController {
     @FXML private Text selectedBalanceText;
     @FXML private TextField amountField;
     @FXML private TextField descriptionField;
-    @FXML private ComboBox<String> transferAccountComboBox;
-    @FXML private VBox transferSection;
+
 
     // --- Transaction Buttons ---
     @FXML private Button depositButton;
@@ -301,7 +307,6 @@ public class CustomerDashboardController {
     }
 
     private void updateTransactionOptions(Account account) {
-        transferSection.setVisible(false);
 
         if (account instanceof ChequeAccount) {
             transactionTitle.setText("Cheque Account");
@@ -495,16 +500,7 @@ public class CustomerDashboardController {
         return currentlySelectedAccount;
     }
 
-    @FXML
-    private void handleViewAllTransactions() {
-        try {
-            List<Transaction> allTransactions = transactionDAO.findTransactionsByCustomerId(currentCustomer.getCustomerId());
-            ObservableList<Transaction> transactionList = FXCollections.observableArrayList(allTransactions);
-            transactionsTable.setItems(transactionList);
-        } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Data Error", "Failed to load all transactions: " + e.getMessage());
-        }
-    }
+
 
     @FXML
     private void handleFilterTransactions() {
@@ -527,14 +523,6 @@ public class CustomerDashboardController {
             showAlert(AlertType.ERROR, "Filter Error", "Failed to filter transactions: " + e.getMessage());
         }
     }
-
-    @FXML
-    private void handleRefresh() {
-        loadAccounts();
-        loadRecentTransactions();
-        loadCustomerData();
-    }
-
 
 
     @FXML private void handleLogout() {
@@ -561,22 +549,6 @@ public class CustomerDashboardController {
         closeTransactionPanel();
     }
 
-    @FXML
-    private void handleTransfer() {
-        try {
-            List<Account> accounts = accountDAO.findAccountsByCustomerId(currentCustomer.getCustomerId());
-            ObservableList<String> accountNumbers = FXCollections.observableArrayList();
-            for (Account account : accounts) {
-                accountNumbers.add(account.getAccountNumber() + " - " + getAccountTypeDisplay(account));
-            }
-            transferAccountComboBox.setItems(accountNumbers);
-            transactionTitle.setText("Transfer Funds");
-            transferSection.setVisible(true);
-            openTransactionPanel();
-        } catch (Exception e) {
-            showAlert(AlertType.ERROR, "Transfer Error", "Failed to load accounts for transfer: " + e.getMessage());
-        }
-    }
 
     private void openTransactionPanel() {
         welcomePanel.setVisible(false);
@@ -596,8 +568,6 @@ public class CustomerDashboardController {
     private void clearTransactionForm() {
         amountField.clear();
         descriptionField.clear();
-        transferAccountComboBox.getSelectionModel().clearSelection();
-        transferSection.setVisible(false);
     }
 
     private void refreshData() {
@@ -613,4 +583,6 @@ public class CustomerDashboardController {
         alert.setContentText(message);
         alert.showAndWait();
     }
+
+
 } 

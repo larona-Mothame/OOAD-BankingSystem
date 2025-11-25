@@ -15,8 +15,8 @@ import java.time.LocalDate;
 import java.util.UUID;
 
 public class AccountService {
-    private AccountDAO accountDAO = new AccountDAO();
-    private CustomerDAO customerDAO = new CustomerDAO();
+//    private AccountDAO accountDAO = new AccountDAO();
+//    private CustomerDAO customerDAO = new CustomerDAO();
 
     public String createNewAccount(String firstName, String lastName, String nationalId,
                                    LocalDate dateOfBirth, String gender, String email,
