@@ -1,8 +1,6 @@
 package com.bankingsystem.db;
-
 import com.bankingsystem.database.DBConnection;
 import com.bankingsystem.model.*;
-
 import java.sql.*;
 import java.math.BigDecimal;
 import java.util.ArrayList;

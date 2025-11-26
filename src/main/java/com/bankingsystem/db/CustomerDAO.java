@@ -1,10 +1,8 @@
 package com.bankingsystem.db;
-
 import com.bankingsystem.model.Customer;
 import com.bankingsystem.model.IndividualCustomer;
 import com.bankingsystem.util.PasswordUtil;
 import com.bankingsystem.database.DBConnection;
-
 import java.sql.*;
 import java.util.logging.Level;
 import java.util.logging.Logger;
