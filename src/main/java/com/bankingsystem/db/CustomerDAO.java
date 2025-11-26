@@ -1,4 +1,5 @@
 package com.bankingsystem.db;
+import com.bankingsystem.model.CompanyCustomer;
 import com.bankingsystem.model.Customer;
 import com.bankingsystem.model.IndividualCustomer;
 import com.bankingsystem.util.PasswordUtil;
@@ -41,15 +42,6 @@ public class CustomerDAO {
     }
 
     private Customer createCustomerFromResultSet(ResultSet rs) throws SQLException {
-        ResultSetMetaData metaData = rs.getMetaData();
-        int columnCount = metaData.getColumnCount();
-        LOGGER.info("Creating customer from ResultSet. Columns detected: " + columnCount);
-        for (int i = 1; i <= columnCount; i++) {
-            try {
-                LOGGER.info("Column " + metaData.getColumnName(i) + " = " + rs.getString(i));
-            } catch (SQLException ignored) { }
-        }
-
         String customerId = rs.getString("customer_id");
         String firstName = rs.getString("first_name");
         String lastName = rs.getString("last_name");
@@ -62,6 +54,21 @@ public class CustomerDAO {
         String nationalId = rs.getString("national_id");
         Date dateOfBirth = rs.getDate("date_of_birth");
 
+        // 👉 Detect if this is a company
+        if (isCompanyCustomer(customerId)) {
+            return loadCompanyCustomer(
+                    customerId,
+                    firstName,  // stored as company name
+                    phoneNumber,
+                    email,
+                    address,
+                    username,
+                    passwordHash,
+                    isActive
+            );
+        }
+
+        // Otherwise load individual
         return new IndividualCustomer(
                 customerId,
                 firstName + " " + lastName,
@@ -75,6 +82,7 @@ public class CustomerDAO {
                 dateOfBirth
         );
     }
+
 
     private boolean verifyPassword(String inputPassword, String storedHash) {
         return PasswordUtil.verifyPassword(inputPassword, storedHash);
@@ -109,4 +117,76 @@ public class CustomerDAO {
             return false;
         }
     }
+
+    private boolean isCompanyCustomer(String customerId) {
+        String sql = "SELECT 1 FROM company_customers WHERE customer_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, customerId);
+            ResultSet rs = stmt.executeQuery();
+            return rs.next();
+
+        } catch (SQLException e) {
+            LOGGER.log(Level.SEVERE, "Failed to check company customer", e);
+            return false;
+        }
+    }
+
+    private Customer loadCompanyCustomer(String customerId,
+                                         String companyName,
+                                         String contactNumber,
+                                         String email,
+                                         String address,
+                                         String username,
+                                         String passwordHash,
+                                         boolean isActive) {
+
+        String sql = "SELECT * FROM company_customers WHERE customer_id = ?";
+
+        try (Connection conn = DBConnection.getConnection();
+             PreparedStatement stmt = conn.prepareStatement(sql)) {
+
+            stmt.setString(1, customerId);
+            ResultSet rs = stmt.executeQuery();
+
+            if (rs.next()) {
+                String regNo = rs.getString("company_registration_number");
+                String primaryContact = rs.getString("primary_contact_person");
+
+                return new CompanyCustomer(
+                        customerId,
+                        companyName,         // stored as first_name
+                        contactNumber,
+                        email,
+                        address,
+                        username,
+                        passwordHash,
+                        isActive,
+                        regNo,
+                        primaryContact
+                );
+            }
+
+        } catch (SQLException ex) {
+            LOGGER.log(Level.SEVERE, "Failed loading company details", ex);
+        }
+
+        // fallback (shouldn't happen)
+        return new CompanyCustomer(
+                customerId,
+                companyName,
+                contactNumber,
+                email,
+                address,
+                username,
+                passwordHash,
+                isActive,
+                "UNKNOWN",
+                null
+        );
+    }
+
+
 }

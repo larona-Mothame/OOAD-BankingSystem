@@ -183,12 +183,5 @@
         </SplitPane>
     </center>
 
-    <!-- BOTTOM FOOTER -->
-    <bottom>
-        <HBox alignment="CENTER" spacing="10" style="-fx-background-color: #222; -fx-padding: 15;">
-            <Text text="© 2025 Sediba Financial. All rights reserved." style="-fx-fill: rgb(255,255,255); -fx-font-size: 12;"/>
-            <Hyperlink text="Terms and Conditions apply" onAction="#handleTermsAndConditions" style="-fx-text-fill: rgb(255,255,255); -fx-font-size: 12; -fx-border-color: transparent;"/>
-        </HBox>
-    </bottom>
 
 </BorderPane>

@@ -133,4 +133,8 @@ public abstract class Customer {
                 ", isActive=" + isActive +
                 '}';
     }
+
+    public String getPhone() {
+        return getContactNumber();
+    }
 }

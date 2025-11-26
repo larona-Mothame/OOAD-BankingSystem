@@ -27,11 +27,8 @@ public class CompanyCustomer extends Customer {
         this.primaryContactPerson = primaryContactPerson;
     }
 
-    public String getCompanyRegistrationNumber() {
-        return companyRegistrationNumber;
-    }
 
-    public String getPrimaryContactPerson() {
+    public String getPrimaryContact() {
         return primaryContactPerson;
     }
 
@@ -53,4 +50,11 @@ public class CompanyCustomer extends Customer {
                 ", primaryContactPerson='" + primaryContactPerson + '\'' +
                 '}';
     }
+
+    public String getRegistrationNumber() {
+        return companyRegistrationNumber;
+    }
+
+
+
 }
